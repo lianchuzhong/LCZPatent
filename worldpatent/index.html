@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>不老投资人</title>
+<title>世界专利库 - World Patent Collection</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#F8F8F6;--card:#FFFFFF;--text:#1C1C1E;--text2:#9E9E9E;--gold:#D4AF37;--divider:#E5E5E5;--icon:#BDBDBD;--skeleton:#F0F0F0}
@@ -16,8 +16,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .header-actions{display:flex;align-items:center;gap:12px}
 .header-btn{width:28px;height:28px;position:relative;cursor:pointer;color:var(--icon)}
 .header-btn svg{width:100%;height:100%}
-.badge{position:absolute;top:-6px;right:-6px;background:var(--gold);color:white;font-size:8px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;display:none}
-.badge.show{display:flex}
 /* Bottom Nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;align-items:center;padding:8px 0;border-top:1px solid var(--divider);z-index:200;padding-bottom:max(8px,env(safe-area-inset-bottom))}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;color:var(--icon);font-size:10px;background:none;border:none;padding:4px 12px}
@@ -26,7 +24,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* Feed */
 .feed-grid{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .feed-card{background:var(--card);border-radius:24px;overflow:hidden;break-inside:avoid;margin-bottom:0}
-.feed-card-img{width:100%;height:auto;aspect-ratio:3/4;background:var(--skeleton);display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:32px;position:relative}
+.feed-card-img{width:100%;height:auto;aspect-ratio:3/4;background:var(--skeleton);display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:32px;position:relative;overflow:hidden}
+.feed-card-img img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
 .feed-card .promoted{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.5);color:var(--promoted-tag,#757575);padding:4px 10px;border-radius:4px;font-size:10px;display:none}
 .feed-card .promoted.show{display:block}
 .feed-card-body{padding:16px}
@@ -38,21 +37,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .feed-card-footer .actions{display:flex;gap:16px}
 .feed-card-footer .actions svg{width:20px;height:20px;color:var(--icon);cursor:pointer}
 .feed-card-footer .actions svg.active{color:var(--gold)}
-/* Pages */
 .page-content{padding:0 20px 20px}
-/* Discover */
-.search-bar{padding:16px;background:var(--bg);position:sticky;top:0;z-index:50}
+/* Search */
+.search-bar{padding:16px 20px;background:var(--bg);position:sticky;top:0;z-index:50}
 .search-bar input{width:100%;height:44px;border:none;border-radius:22px;background:var(--card);padding:0 16px;font-size:15px;color:var(--text);outline:none;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
 .search-bar input::placeholder{color:var(--text2)}
-.section-title{font-size:18px;font-weight:bold;color:var(--text);padding:16px 20px 8px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:8px 20px}
-.chip{padding:8px 16px;border-radius:20px;background:var(--card);color:var(--text2);font-size:14px;cursor:pointer;border:1px solid var(--divider);transition:all 0.2s}
-.chip:hover,.chip.active{border-color:var(--gold);color:var(--gold)}
+.search-bar input:focus{box-shadow:0 1px 6px rgba(212,175,55,0.2)}
 /* Detail */
 .detail-header{display:flex;align-items:center;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:100}
 .detail-header .back{width:28px;height:28px;cursor:pointer;color:var(--text)}
 .detail-header h2{flex:1;text-align:center;font-size:18px;font-family:Georgia,'Times New Roman',serif}
-.detail-image{width:100%;height:300px;background:var(--skeleton);display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:48px}
+.detail-image{width:100%;height:300px;background:var(--skeleton);display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:48px;overflow:hidden;position:relative}
+.detail-image img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
 .detail-body{padding:20px}
 .detail-body h2{font-family:Georgia,'Times New Roman',serif;font-size:24px;margin-bottom:16px}
 .detail-author{display:flex;align-items:center;gap:12px;margin-bottom:20px}
@@ -65,59 +61,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .detail-actions{display:flex;gap:24px;margin-bottom:40px}
 .detail-actions span{display:flex;align-items:center;gap:6px;color:var(--text2);font-size:14px;cursor:pointer}
 .detail-actions span svg{width:18px;height:18px}
-.detail-contact{text-align:center;color:var(--gold);font-size:14px}
-/* Chat */
-.chat-page{display:flex;flex-direction:column;height:100vh}
-.chat-header{display:flex;align-items:center;padding:12px 16px;background:var(--bg);position:sticky;top:0;z-index:100}
-.chat-header .back{width:28px;height:28px;cursor:pointer;color:var(--text)}
-.chat-header h2{flex:1;text-align:center;font-size:18px;font-family:Georgia,'Times New Roman',serif}
-.chat-messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:12px}
-.chat-msg{max-width:80%;padding:12px 16px;border-radius:16px;font-size:14px;line-height:1.4}
-.chat-msg.user{background:var(--gold);color:white;align-self:flex-end;border-bottom-right-radius:4px}
-.chat-msg.investor{background:var(--card);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
-.chat-msg .sender{font-size:11px;margin-top:4px;opacity:0.7}
-.chat-input-bar{display:flex;gap:8px;padding:12px;background:var(--card);border-top:1px solid var(--divider)}
-.chat-input-bar input{flex:1;height:44px;border:none;border-radius:22px;background:var(--bg);padding:0 16px;font-size:14px;color:var(--text);outline:none}
-.chat-input-bar input::placeholder{color:var(--text2)}
-.chat-input-bar button{width:44px;height:44px;border:none;border-radius:50%;background:var(--gold);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center}
-/* Cart */
-.cart-page{display:flex;flex-direction:column;height:100vh}
-.cart-list{flex:1;overflow-y:auto;padding:12px}
-.cart-item{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:12px;margin-bottom:8px}
-.cart-item-img{width:56px;height:56px;border-radius:8px;background:var(--skeleton);flex-shrink:0}
-.cart-item-info{flex:1}
-.cart-item-info h4{font-size:15px;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
-.cart-item-info p{font-size:12px;color:var(--text2);margin-top:4px}
-.cart-item-remove{width:28px;height:28px;cursor:pointer;color:var(--text2);flex-shrink:0}
-.cart-bottom{padding:16px;background:var(--card);border-top:1px solid var(--divider)}
-.cart-bottom label{font-size:14px;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
-.cart-bottom textarea{width:100%;min-height:80px;margin-top:8px;padding:12px;border:1px solid var(--divider);border-radius:12px;font-size:14px;color:var(--text);resize:vertical;outline:none;font-family:Georgia,'Times New Roman',serif}
-.cart-bottom textarea::placeholder{color:var(--text2)}
-.cart-bottom .empty-hint{font-size:12px;color:var(--text2);margin-top:8px;display:none}
-.cart-bottom .submit-btn{width:100%;height:48px;margin-top:12px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:16px;font-family:Georgia,'Times New Roman',serif;cursor:pointer;transition:opacity 0.2s}
-.cart-bottom .submit-btn:disabled{opacity:0.5;cursor:not-allowed}
+.detail-contact{text-align:center;color:var(--gold);font-size:14px;cursor:pointer}
+/* Contact Page */
+.contact-page{padding:20px 20px 100px}
+.contact-hero{text-align:center;padding:32px 0 24px}
+.contact-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
+.contact-hero p{font-size:14px;color:var(--text2);margin-top:8px}
+.contact-card{background:var(--card);border-radius:16px;padding:20px;margin-bottom:12px;display:flex;align-items:center;gap:16px;border:1px solid var(--divider);transition:border-color 0.2s}
+.contact-card:hover{border-color:var(--gold)}
+.contact-card .icon-wrap{width:48px;height:48px;border-radius:50%;background:rgba(212,175,55,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-card .icon-wrap svg{width:24px;height:24px;color:var(--gold)}
+.contact-card .info{flex:1}
+.contact-card .label{font-size:12px;color:var(--text2);margin-bottom:2px}
+.contact-card .value{font-size:16px;color:var(--text);font-family:Georgia,'Times New Roman',serif;word-break:break-all}
+.contact-card .action-btn{padding:8px 20px;border:1px solid var(--gold);border-radius:20px;background:none;color:var(--gold);font-size:13px;cursor:pointer;font-family:Georgia,'Times New Roman',serif;flex-shrink:0;transition:all 0.2s;text-decoration:none}
+.contact-card .action-btn:hover{background:var(--gold);color:white}
+.contact-divider{text-align:center;padding:16px 0;color:var(--text2);font-size:12px;display:flex;align-items:center;gap:12px}
+.contact-divider::before,.contact-divider::after{content:'';flex:1;height:1px;background:var(--divider)}
 /* Publish */
 .publish-page{padding:20px}
 .publish-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg);position:sticky;top:0;z-index:100}
 .publish-header .close{width:28px;height:28px;cursor:pointer;color:var(--text)}
 .publish-header .publish-btn{color:var(--gold);font-size:16px;cursor:pointer;border:none;background:none;font-family:Georgia,'Times New Roman',serif}
-.image-upload{border:2px dashed var(--divider);border-radius:12px;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text2);cursor:pointer;margin-bottom:20px}
-.image-upload svg{width:48px;height:48px;margin-bottom:8px}
-.publish-form input,.publish-form textarea{width:100%;border:none;background:none;padding:12px 0;font-size:16px;color:var(--text);outline:none;font-family:Georgia,'Times New Roman',serif}
-.publish-form input::placeholder,.publish-form textarea::placeholder{color:var(--text2)}
-.publish-form textarea{min-height:200px;resize:vertical;line-height:1.6}
-.publish-divider{height:1px;background:var(--divider);margin:8px 0}
-/* Profile */
-.profile-cover{width:100%;height:120px;background:var(--skeleton);border-radius:12px;margin-bottom:0}
-.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--skeleton);margin:-36px auto 0;border:2px solid var(--card);position:relative;z-index:1}
-.profile-name{text-align:center;font-size:20px;font-weight:bold;margin-top:12px}
-.profile-stats{display:flex;justify-content:center;gap:0;margin-top:20px}
-.profile-stats>div{flex:1;text-align:center}
-.profile-stats .num{font-size:18px;font-weight:bold;color:var(--text)}
-.profile-stats .label{font-size:12px;color:var(--text2);margin-top:4px}
-.profile-contact{width:100%;height:44px;margin-top:24px;border:1px solid var(--gold);border-radius:22px;background:none;color:var(--gold);font-size:15px;cursor:pointer;font-family:Georgia,'Times New Roman',serif}
-.profile-section-title{font-size:18px;font-weight:bold;color:var(--text);margin-top:32px;margin-bottom:16px}
-/* Publish */
 .publish-form{padding:20px}
 .publish-form .image-area{border:2px dashed var(--divider);border-radius:12px;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text2);cursor:pointer;margin-bottom:20px}
 .publish-form .image-area svg{width:48px;height:48px;margin-bottom:8px}
@@ -125,7 +90,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .publish-form input::placeholder,.publish-form textarea::placeholder{color:var(--text2)}
 .publish-form textarea{min-height:200px;resize:vertical;line-height:1.6}
 .publish-divider{height:1px;background:var(--divider);margin:8px 0}
-/* Dialog overlay */
+/* Patent */
+.patent-page{padding:20px 20px 100px}
+.patent-form{display:flex;flex-direction:column;gap:16px;margin-top:16px}
+.patent-form label{font-size:14px;color:var(--text2);font-family:Georgia,'Times New Roman',serif}
+.patent-form input,.patent-form textarea,.patent-form select{width:100%;padding:12px;border:1px solid var(--divider);border-radius:12px;font-size:14px;color:var(--text);outline:none;font-family:Georgia,'Times New Roman',serif;background:var(--card)}
+.patent-form textarea{min-height:100px;resize:vertical}
+.patent-form input:focus,.patent-form textarea:focus{border-color:var(--gold)}
+.patent-upload-area{border:2px dashed var(--divider);border-radius:12px;padding:24px;text-align:center;color:var(--text2);cursor:pointer;transition:border-color 0.2s}
+.patent-upload-area:hover{border-color:var(--gold)}
+.patent-upload-area svg{width:48px;height:48px;margin-bottom:8px}
+.patent-upload-area.has-file{border-color:var(--gold);background:rgba(212,175,55,0.05)}
+.patent-submit-btn{width:100%;height:48px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:16px;font-family:Georgia,'Times New Roman',serif;cursor:pointer;transition:opacity 0.2s;margin-top:8px}
+.patent-submit-btn:disabled{opacity:0.5;cursor:not-allowed}
+.patent-list{display:flex;flex-direction:column;gap:12px;padding:16px 0}
+.patent-card{background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--divider);cursor:pointer;transition:transform 0.2s}
+.patent-card:hover{transform:translateY(-2px)}
+.patent-card h3{font-size:16px;font-family:Georgia,'Times New Roman',serif;color:var(--text);margin-bottom:6px}
+.patent-card .meta{font-size:12px;color:var(--text2);margin-bottom:8px}
+.patent-card .desc{font-size:13px;color:var(--text);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.patent-card .tag{display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(212,175,55,0.1);color:var(--gold);font-size:11px;margin-top:8px}
+.patent-tabs{display:flex;gap:0;margin-top:8px;border-bottom:1px solid var(--divider)}
+.patent-tab{padding:10px 20px;cursor:pointer;font-size:14px;color:var(--text2);border-bottom:2px solid transparent;font-family:Georgia,'Times New Roman',serif}
+.patent-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+/* Dialog */
 .dialog-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
 .dialog-overlay.show{display:flex}
 .dialog{background:var(--card);border-radius:16px;padding:32px;max-width:360px;width:90%;text-align:center}
@@ -136,117 +124,113 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* Toast */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 24px;border-radius:24px;font-size:14px;z-index:9999;display:none;animation:fadeIn 0.3s}
 @keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-/* SVG icons inline */
-.icon{width:24px;height:24px;display:inline-block;vertical-align:middle}
 </style>
 </head>
 <body>
 
 <div id="app">
-  <!-- Welcome Dialog -->
-  <div class="dialog-overlay" id="welcomeDialog">
-    <div class="dialog">
-      <h2 style="color:var(--gold);font-size:18px;font-family:Georgia,'Times New Roman',serif;margin-bottom:12px">一封来自不老的情书</h2>
-      <div class="divider" style="width:40px;height:1px;background:var(--divider);margin:0 auto 16px"></div>
-      <p>您好，不老投资人，光阴似箭，人生短短几十载，你拥有的一小部分将从这里开始</p>
-      <button onclick="closeWelcomeDialog()" style="padding:12px 32px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,'Times New Roman',serif">开始探索</button>
-    </div>
-  </div>
-
   <!-- Toast -->
   <div id="toast" class="toast"></div>
 
-  <!-- ===== HOME PAGE ===== -->
-  <div id="page-home" class="page active">
+  <!-- ===== PATENT PAGE (default landing) ===== -->
+  <div id="page-patent" class="page active">
     <div class="header">
-      <h1>发现</h1>
-      <div class="header-actions">
-        <div class="header-btn" onclick="navigateTo('cart')" style="position:relative">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span class="badge" id="cartBadge">0</span>
-        </div>
-        <div class="header-btn" onclick="navigateTo('chat')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        </div>
-      </div>
+      <h1>世界专利</h1>
+      <div class="header-actions"></div>
     </div>
-    <div class="feed-grid" id="feedGrid"></div>
+    <div class="search-bar"><input type="text" placeholder="搜索专利关键词..." id="searchInput" oninput="searchPatents(this.value)"></div>
+    <div class="patent-tabs">
+      <div class="patent-tab active" onclick="switchPatentTab('list',this)">专利列表</div>
+      <div class="patent-tab" onclick="switchPatentTab('upload',this)">上传专利</div>
+    </div>
+    <div id="patentList" class="patent-list"></div>
   </div>
 
-  <!-- ===== DISCOVER PAGE ===== -->
-  <div id="page-discover" class="page">
-    <div class="header"><h1>发现</h1></div>
-    <div class="search-bar"><input type="text" placeholder="搜索好物..."></div>
-    <div class="section-title">热门话题</div>
-    <div class="chips" id="topicChips"></div>
-    <div class="section-title">推荐关注</div>
-    <div style="padding:8px 20px;color:var(--text2);font-size:14px">更多推荐即将上线</div>
+  <!-- ===== PATENT UPLOAD PAGE ===== -->
+  <div id="page-patent-upload" class="page">
+    <div class="detail-header">
+      <svg class="back" onclick="navigateTo('patent')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <h2>上传专利</h2>
+    </div>
+    <div class="patent-page">
+      <div class="patent-form">
+        <div><label>专利标题 *</label><input type="text" id="patentTitle" placeholder="输入专利名称"></div>
+        <div><label>专利描述 *</label><textarea id="patentDesc" placeholder="描述该专利的技术内容..."></textarea></div>
+        <div><label>申请人</label><input type="text" id="patentApplicant" placeholder="申请人/公司名称"></div>
+        <div><label>发明人</label><input type="text" id="patentInventor" placeholder="发明人姓名"></div>
+        <div><label>专利号</label><input type="text" id="patentNumber" placeholder="例如: US12345678B2"></div>
+        <div><label>申请日期</label><input type="date" id="patentDate"></div>
+        <div>
+          <label>附件文件</label>
+          <div class="patent-upload-area" id="patentFileArea" onclick="document.getElementById('patentFileInput').click()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div id="patentFileLabel">点击上传附件 (PDF等)</div>
+          </div>
+          <input type="file" id="patentFileInput" style="display:none" onchange="handlePatentFileSelect(event)">
+        </div>
+        <div>
+          <label>图片</label>
+          <div class="patent-upload-area" id="patentImageArea" onclick="document.getElementById('patentImageInput').click()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div id="patentImageLabel">点击上传图片</div>
+          </div>
+          <input type="file" id="patentImageInput" style="display:none" accept="image/*" onchange="handlePatentImageSelect(event)">
+        </div>
+        <button class="patent-submit-btn" id="patentSubmitBtn" onclick="submitPatent()">上传专利</button>
+      </div>
+    </div>
   </div>
 
   <!-- ===== DETAIL PAGE ===== -->
   <div id="page-detail" class="page">
     <div class="detail-header">
-      <svg class="back" onclick="navigateTo('home')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <h2>精品分享</h2>
+      <svg class="back" onclick="navigateTo('patent')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <h2>专利详情</h2>
     </div>
-    <div class="detail-image">📷</div>
+    <div class="detail-image" id="detailImage"><span>📄</span></div>
     <div class="detail-body">
-      <h2 id="detailTitle">精品分享</h2>
+      <h2 id="detailTitle">专利详情</h2>
       <div class="detail-author">
         <div class="avatar"></div>
-        <div class="info"><div class="name" id="detailAuthor">Sarah</div><div class="date" id="detailDate">2024年1月</div></div>
+        <div class="info"><div class="name" id="detailAuthor">连楚钟</div><div class="date" id="detailDate">2024年1月</div></div>
       </div>
       <div class="detail-divider"></div>
-      <div class="detail-content" id="detailContent">这是一段高品质的使用体验分享内容。用户可以详细描述产品的特点、使用场景、优缺点以及适合的人群。整个页面设计保持极简风格，没有任何购买按钮或交易元素，仅作为内容分享平台。</div>
+      <div class="detail-content" id="detailContent">专利技术内容详情。</div>
       <div class="detail-actions">
         <span id="detailLike"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg> 赞</span>
         <span id="detailComment"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 评论</span>
         <span id="detailCollect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> 收藏</span>
         <span id="detailShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> 分享</span>
       </div>
-      <div class="detail-contact">联系合作 · Collaboration</div>
+      <div class="detail-contact" onclick="navigateTo('contact')">联系专利持有人 · 联系方式 →</div>
     </div>
   </div>
 
-  <!-- ===== CHAT PAGE ===== -->
-  <div id="page-chat" class="page chat-page">
-    <div class="chat-header">
-      <svg class="back" onclick="navigateTo('home')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <h2>私信聊天</h2>
-    </div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input-bar">
-      <input type="text" id="chatInput" placeholder="输入消息..." onkeydown="if(event.key==='Enter')sendMessage()">
-      <button onclick="sendMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-    </div>
-  </div>
-
-  <!-- ===== CART PAGE ===== -->
-  <div id="page-cart" class="page cart-page">
-    <div class="chat-header">
-      <svg class="back" onclick="navigateTo('home')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <h2>内容车</h2>
-    </div>
-    <div class="cart-list" id="cartList"></div>
-    <div class="cart-bottom">
-      <label>备注</label>
-      <textarea id="cartNote" placeholder="请输入您对这些内容的看法或需求..."></textarea>
-      <div class="empty-hint" id="cartEmptyHint">内容车还是空的，去看看喜欢的内容吧</div>
-      <button class="submit-btn" id="cartSubmit" onclick="submitCart()" disabled>提交给不老投资人</button>
+  <!-- ===== CONTACT PAGE ===== -->
+  <div id="page-contact" class="page">
+    <div class="header"><h1>联系方式</h1></div>
+    <div class="contact-page" id="contactPage">
+      <div class="contact-hero">
+        <h1>联系不老投资人</h1>
+        <p>选择您喜欢的方式与我联系 · Looking forward to collaborating</p>
+      </div>
+      <div id="contactList"></div>
     </div>
   </div>
 
   <!-- ===== PUBLISH PAGE ===== -->
   <div id="page-publish" class="page">
     <div class="publish-header">
-      <svg class="close" onclick="navigateTo('home')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg class="close" onclick="navigateTo('patent')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       <button class="publish-btn" onclick="publishContent()">发布</button>
     </div>
     <div class="publish-form">
-      <div class="image-area" onclick="alert('图片上传功能开发中')">
+      <div class="image-area" id="pubImageArea" onclick="document.getElementById('pubImageInput').click()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        <span>添加图片</span>
+        <span id="pubImageLabel">添加图片/专利图</span>
+        <img id="pubImagePreview" style="display:none;max-width:100%;max-height:180px;border-radius:8px;margin-top:8px">
       </div>
+      <input type="file" id="pubImageInput" accept="image/*" style="display:none" onchange="previewPublishImage(event)">
       <input type="text" id="pubTitle" placeholder="标题">
       <div class="publish-divider"></div>
       <textarea id="pubContent" placeholder="分享你的体验..."></textarea>
@@ -255,183 +239,315 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
   </div>
 
-  <!-- ===== PROFILE PAGE ===== -->
-  <div id="page-profile" class="page">
-    <div class="header"><h1>我的</h1></div>
-    <div style="padding:20px">
-      <div class="profile-cover"></div>
-      <div class="profile-avatar"></div>
-      <div class="profile-name">创作者</div>
-      <div class="profile-stats">
-        <div><div class="num">12</div><div class="label">分享</div></div>
-        <div><div class="num">48</div><div class="label">收藏</div></div>
-        <div><div class="num">256</div><div class="label">粉丝</div></div>
-      </div>
-      <button class="profile-contact">联系合作</button>
-      <div class="profile-section-title">分享</div>
-      <div style="color:var(--text2);font-size:14px;text-align:center;padding:40px 0">暂无内容</div>
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="navigateTo('patent')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+      <span>专利</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('publish')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span>发布</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('contact')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>联系方式</span>
     </div>
   </div>
 </div>
 
 <script>
+// ===== CONFIG =====
+const isGitHubPages = location.hostname.includes('github.io');
+const GIT_OWNER = 'lianchuzhong';
+const GIT_REPO = 'worldPatent';
+const GIT_BRANCH = 'main';
+const RAW = `https://raw.githubusercontent.com/${GIT_OWNER}/${GIT_REPO}/${GIT_BRANCH}/data`;
+
 // ===== DATA =====
-const sampleItems = [
-  {id:'1',title:'vintage leather bag',description:'简约而不失质感，适合日常通勤...',author:'Sarah',promoted:false},
-  {id:'2',title:'Handcrafted ceramic vase',description:'手工制作的陶瓷花瓶...',author:'Studio',promoted:true},
-  {id:'3',title:'Japanese minimalist desk lamp',description:'柔和的灯光营造温馨氛围...',author:'Taro',promoted:false},
-  {id:'4',title:'Premium wool blanket',description:'羊毛毯柔软舒适...',author:'CozyHome',promoted:false},
-  {id:'5',title:'Artisan coffee maker',description:'精致咖啡机的使用体验...',author:'Coffee',promoted:true},
-  {id:'6',title:'Scandinavian wooden chair',description:'北欧风格的设计...',author:'Nordic',promoted:false}
+let feedItems = [];
+
+const defaultPatents = [
+  {id:'demo1',title:'一种新型太阳能电池板',description:'本发明涉及一种高效太阳能电池板，通过多层纳米结构提高光电转换效率，适用于户用和工业光伏发电系统。',author:'匿名',promoted:true,imageUrl:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=500&fit=crop',timestamp:1710000000000},
+  {id:'demo2',title:'智能水质监测系统',description:'一种基于物联网的实时水质监测装置，可同时检测pH值、浊度、余氯等多项指标，数据自动上传至云端。',author:'匿名',promoted:false,imageUrl:'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=500&fit=crop',timestamp:1710000001000},
+  {id:'demo3',title:'模块化建筑结构',description:'一种可快速组装的模块化建筑结构，采用预制构件和标准化连接节点，大幅缩短施工周期。',author:'匿名',promoted:false,imageUrl:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=500&fit=crop',timestamp:1710000002000},
+  {id:'demo4',title:'医疗影像AI辅助诊断系统',description:'基于深度学习的医学影像分析系统，可自动识别X光、CT影像中的异常病灶，辅助医生提高诊断效率。',author:'匿名',promoted:true,imageUrl:'https://images.pexels.com/photos/5723883/pexels-photo-5723883.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop',timestamp:1710000003000},
+  {id:'demo5',title:'新型可降解包装材料',description:'一种以植物纤维为基材的可降解包装材料，具有良好的强度和防水性，可在90天内自然降解。',author:'匿名',promoted:false,imageUrl:'https://images.pexels.com/photos/7464678/pexels-photo-7464678.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop',timestamp:1710000004000},
+  {id:'demo6',title:'无线充电智能泊车系统',description:'集成无线充电技术的智能泊车系统，车辆停入车位后自动启动充电，支持多车型兼容。',author:'匿名',promoted:false,imageUrl:'https://images.pexels.com/photos/37029446/pexels-photo-37029446.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop',timestamp:1710000005000}
 ];
 
-const cart = {items:[],add(i){if(!this.items.find(x=>x.id===i.id)){this.items.push(i);return true}return false},remove(id){this.items=this.items.filter(x=>x.id!==id)},clear(){this.items=[]},get size(){return this.items.length},isInCart(id){return this.items.some(x=>x.id===id)}};
-
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000)}
-
-function updateCartBadge(){const b=document.getElementById('cartBadge');const c=cart.size;b.textContent=c;b.classList.toggle('show',c>0)}
 
 function navigateTo(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  if(page==='home'){document.getElementById('page-home').classList.add('active')}
-  else if(page==='discover'){document.getElementById('page-discover').classList.add('active')}
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(page==='patent'){document.getElementById('page-patent').classList.add('active');navActive(0);loadPatents()}
+  else if(page==='patent-upload'){document.getElementById('page-patent-upload').classList.add('active')}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
-  else if(page==='chat'){document.getElementById('page-chat').classList.add('active')}
-  else if(page==='cart'){document.getElementById('page-cart').classList.add('active');renderCart()}
-  else if(page==='publish'){document.getElementById('page-publish').classList.add('active')}
-  else if(page==='profile'){document.getElementById('page-profile').classList.add('active')}
+  else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(2);renderContactPage()}
+  else if(page==='publish'){document.getElementById('page-publish').classList.add('active');navActive(1)}
+}
+function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
+
+// ===== FEED =====
+function searchPatents(query) {
+  const container = document.getElementById('patentList');
+  if (!query.trim()) { switchPatentTab('list', document.querySelector('.patent-tab')); return }
+  const filtered = feedItems.filter(i => i.title.includes(query) || (i.description||'').includes(query));
+  container.innerHTML = filtered.length
+    ? filtered.map(item => patentCard(item)).join('')
+    : '<div style="text-align:center;padding:40px;color:var(--text2)">未找到相关专利</div>';
 }
 
-function closeWelcomeDialog(){document.getElementById('welcomeDialog').style.display='none'}
-
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000)}
-
-function renderFeed(){
-  const grid=document.getElementById('feedGrid');
-  grid.innerHTML=sampleItems.map(item=>`
-    <div class="feed-card" onclick="openDetail('${item.id}')">
-      <div class="feed-card-img">
-        <span class="promoted ${item.promoted?'show':''}">推广</span>
-        📷
-      </div>
-      <div class="feed-card-body">
-        <h3>${item.title}</h3>
-        <p>${item.description}</p>
-        <div class="feed-card-footer">
-          <div class="avatar"></div>
-          <span class="author">${item.authorName}</span>
-          <div class="actions">
-            <svg onclick="event.stopPropagation();showToast('点赞功能开发中')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg>
-            <svg onclick="event.stopPropagation();showToast('评论功能开发中')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-            <svg onclick="event.stopPropagation();showToast('分享功能开发中')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-            <svg onclick="event.stopPropagation();addToCart('${item.id}')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+function patentCard(item) {
+  return `
+    <div class="feed-card" style="margin-bottom:0;border-radius:16px" onclick="openDetail('${item.id}')">
+      <div style="display:flex;gap:12px;padding:12px">
+        <div style="width:80px;height:80px;border-radius:8px;background:var(--skeleton);flex-shrink:0;overflow:hidden;position:relative">
+          ${item.imageUrl?`<img src="${item.imageUrl}" alt="${item.title}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover">`:'📄'}
+        </div>
+        <div style="flex:1;min-width:0">
+          <h3 style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--text);margin-bottom:4px">${item.title}</h3>
+          <p style="font-size:12px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${item.description||''}</p>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--skeleton);flex-shrink:0"></div>
+            <span style="font-size:11px;color:var(--text2)">${item.author||'连楚钟'}</span>
           </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+}
+
+// ===== CONTACT =====
+const contactInfo = [
+  {label:'微信',icon:'chat',value:'LCZ13202125281',action:'复制'},
+  {label:'手机',icon:'phone',value:'18917266757',action:'复制'},
+  {label:'手机2',icon:'phone',value:'13202125281',action:'复制'},
+  {label:'邮箱',icon:'mail',value:'cllcz@foxmail.com',action:'复制'},
+  {label:'邮箱2',icon:'mail',value:'lianchuzhong@hotmail.com',action:'复制'},
+  {label:'邮箱3',icon:'mail',value:'lianchuzhong96@gmail.com',action:'复制'},
+  {label:'GitHub',icon:'github',value:'github.com/lianchuzhong',action:'前往',href:'https://github.com/lianchuzhong'}
+];
+const contactIcons = {
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
+  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>',
+  github:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>'
+};
+
+function renderContactPage(){
+  const list = document.getElementById('contactList');
+  if (!list) return;
+  list.innerHTML = contactInfo.map(c => {
+    const iconHtml = contactIcons[c.icon] || '';
+    let btnHtml;
+    if (c.href) {
+      btnHtml = `<a href="${c.href}" target="_blank" class="action-btn">前往</a>`;
+    } else {
+      btnHtml = `<button class="action-btn" onclick="copyContact('${c.value}')">复制</button>`;
+    }
+    return `
+      <div class="contact-card">
+        <div class="icon-wrap">${iconHtml}</div>
+        <div class="info">
+          <div class="label">${c.label}</div>
+          <div class="value">${c.value}</div>
+        </div>
+        ${btnHtml}
+      </div>`;
+  }).join('');
+}
+
+function copyContact(text){
+  const ta = document.createElement('textarea');
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); showToast('已复制到剪贴板') } catch(e) { showToast('复制失败') }
+  document.body.removeChild(ta);
+}
+
+// ===== LOAD FEED =====
+async function loadFeed(){
+  try {
+    const url = isGitHubPages ? RAW+'/feed.json' : '/api/feed';
+    const res = await fetch(url);
+    const data = await res.json();
+    feedItems = data.length > 0 ? data : defaultPatents;
+  } catch(e) { feedItems = defaultPatents }
+  if (!isGitHubPages) {
+    try {
+      const postsRes = await fetch('/api/user-posts');
+      const posts = await postsRes.json();
+      const approved = posts.filter(p=>p.approved).map(p=>({
+        id: p.id, title: p.title, description: p.content,
+        author: '创作者', promoted: false,
+        imageUrl: p.imageUrl || '', timestamp: p.timestamp
+      }));
+      feedItems = [...approved, ...feedItems];
+    } catch(e) {}
+  }
+  renderPatentList();
+}
+
+function renderPatentList(){
+  const container = document.getElementById('patentList');
+  if (!feedItems.length) { container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">暂无专利数据</div>'; return }
+  container.innerHTML = feedItems.map(item => patentCard(item)).join('');
 }
 
 function openDetail(id){
-  const item=sampleItems.find(x=>x.id===id);
-  if(!item)return;
-  document.getElementById('detailTitle').textContent=item.title;
-  document.getElementById('detailAuthor').textContent=item.authorName;
-  document.getElementById('detailContent').textContent=item.description;
+  const item = feedItems.find(x => x.id === id);
+  if (!item) return;
+  document.getElementById('detailTitle').textContent = item.title;
+  document.getElementById('detailAuthor').textContent = item.author || '连楚钟';
+  document.getElementById('detailContent').textContent = item.description || '';
+  const imgContainer = document.getElementById('detailImage');
+  if (item.imageUrl) {
+    imgContainer.innerHTML = `<img src="${item.imageUrl}" alt="${item.title}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover">`;
+  } else {
+    imgContainer.innerHTML = '<span>📷</span>';
+  }
   navigateTo('detail');
 }
 
-function addToCart(id){
-  const item=sampleItems.find(x=>x.id===id);
-  if(!item)return;
-  const added=cart.add(item);
-  showToast(added?'已加入内容车':'已在内容车中');
-  updateCartBadge();
-  renderFeed();
+// ===== PUBLISH =====
+function previewPublishImage(e){
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const preview = document.getElementById('pubImagePreview');
+    preview.src = ev.target.result;
+    preview.style.display = 'block';
+    document.getElementById('pubImageLabel').textContent = '点击更换图片';
+    document.getElementById('pubImageArea').style.borderColor = 'var(--gold)';
+  };
+  reader.readAsDataURL(file);
 }
 
-function renderCart(){
-  const list=document.getElementById('cartList');
-  const empty=document.getElementById('cartEmptyHint');
-  const submit=document.getElementById('cartSubmit');
-  if(cart.items.length===0){
-    list.innerHTML='<div style="text-align:center;padding:40px;color:var(--text2)">内容车还是空的，去看看喜欢的内容吧</div>';
-    empty.style.display='block';
-    submit.disabled=true;
-    return;
-  }
-  empty.style.display='none';
-  submit.disabled=false;
-  list.innerHTML=cart.items.map(item=>`
-    <div class="cart-item">
-      <div class="cart-item-img">📷</div>
-      <div class="cart-item-info">
-        <h4 style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--text)">${item.title}</h4>
-        <p style="font-size:12px;color:var(--text2);margin-top:4px">${item.authorName}</p>
+async function publishContent(){
+  if (isGitHubPages) { showToast('发布功能需在本地运行'); return }
+  const title = document.getElementById('pubTitle').value.trim();
+  const content = document.getElementById('pubContent').value.trim();
+  if (!title || !content) { showToast('请填写标题和内容'); return }
+  const tag = document.getElementById('pubTag').value.trim();
+  const imageInput = document.getElementById('pubImageInput');
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('content', content);
+  formData.append('tag', tag);
+  if (imageInput.files[0]) formData.append('image', imageInput.files[0]);
+  try {
+    const res = await fetch('/api/user-publish', { method:'POST', body:formData });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('pubTitle').value=''; document.getElementById('pubContent').value='';
+      document.getElementById('pubTag').value=''; document.getElementById('pubImageInput').value='';
+      document.getElementById('pubImagePreview').style.display='none';
+      document.getElementById('pubImageLabel').textContent='添加图片';
+      document.getElementById('pubImageArea').style.borderColor='';
+      showToast('发布成功，等待审核！');
+      loadFeed();
+    } else { showToast(data.error||'发布失败') }
+  } catch(e) { showToast('发布失败: '+e.message) }
+}
+
+// ===== PATENT UPLOAD =====
+let patentFile = null;
+let patentImage = null;
+
+function handlePatentFileSelect(e) {
+  patentFile = e.target.files[0];
+  const label = document.getElementById('patentFileLabel');
+  const area = document.getElementById('patentFileArea');
+  if (patentFile) { label.textContent = patentFile.name; area.classList.add('has-file') }
+  else { label.textContent = '点击上传附件 (PDF等)'; area.classList.remove('has-file') }
+}
+
+function handlePatentImageSelect(e) {
+  patentImage = e.target.files[0];
+  const label = document.getElementById('patentImageLabel');
+  const area = document.getElementById('patentImageArea');
+  if (patentImage) { label.textContent = patentImage.name; area.classList.add('has-file') }
+  else { label.textContent = '点击上传图片'; area.classList.remove('has-file') }
+}
+
+async function submitPatent() {
+  if (isGitHubPages) { showToast('专利上传需在本地运行'); return }
+  const title = document.getElementById('patentTitle').value.trim();
+  const description = document.getElementById('patentDesc').value.trim();
+  if (!title || !description) { showToast('请填写标题和描述'); return }
+  const btn = document.getElementById('patentSubmitBtn');
+  btn.disabled = true; btn.textContent = '上传中...';
+  const formData = new FormData();
+  formData.append('title', title); formData.append('description', description);
+  formData.append('applicant', document.getElementById('patentApplicant').value.trim());
+  formData.append('inventor', document.getElementById('patentInventor').value.trim());
+  formData.append('patentNumber', document.getElementById('patentNumber').value.trim());
+  formData.append('applicationDate', document.getElementById('patentDate').value);
+  if (patentFile) formData.append('file', patentFile);
+  if (patentImage) formData.append('image', patentImage);
+  try {
+    const res = await fetch('/api/upload-patent', { method:'POST', body:formData });
+    const data = await res.json();
+    if (data.success) {
+      showToast('专利上传成功！');
+      document.getElementById('patentTitle').value=''; document.getElementById('patentDesc').value='';
+      document.getElementById('patentApplicant').value=''; document.getElementById('patentInventor').value='';
+      document.getElementById('patentNumber').value=''; document.getElementById('patentDate').value='';
+      patentFile=null; patentImage=null;
+      document.getElementById('patentFileLabel').textContent='点击上传附件 (PDF等)';
+      document.getElementById('patentFileArea').classList.remove('has-file');
+      document.getElementById('patentImageLabel').textContent='点击上传图片';
+      document.getElementById('patentImageArea').classList.remove('has-file');
+      navigateTo('patent');
+    } else { showToast(data.error || '上传失败') }
+  } catch(e) { showToast('上传失败: '+e.message) }
+  btn.disabled = false; btn.textContent = '上传专利';
+}
+
+async function loadPatents() {
+  const container = document.getElementById('patentList');
+  const activeTab = document.querySelector('.patent-tab.active');
+  if (activeTab && activeTab.textContent.includes('上传')) return;
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">加载中...</div>';
+  try {
+    const url = isGitHubPages ? RAW+'/patents.json' : '/api/patents';
+    const res = await fetch(url);
+    const patents = await res.json();
+    if (!patents || patents.length===0) {
+      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无专利数据</div>';
+      return;
+    }
+    container.innerHTML = patents.map(p => `
+      <div class="patent-card">
+        <h3>${p.title}</h3>
+        <div class="meta">${p.applicant?'申请人: '+p.applicant:''}${p.patentNumber?' | 专利号: '+p.patentNumber:''}${p.applicationDate?' | '+p.applicationDate:''}</div>
+        <div class="desc">${p.description}</div>
+        ${p.inventor?'<span class="tag">发明人: '+p.inventor+'</span>':''}
+        ${p.file?'<span class="tag">📎 有附件</span>':''}
       </div>
-      <svg class="cart-item-remove" onclick="removeFromCart('${item.id}')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </div>
-  `).join('');
-}
-
-function removeFromCart(id){
-  cart.remove(id);
-  updateCartBadge();
-  renderCart();
-}
-
-function submitCart(){
-  if(cart.items.length===0){showToast('内容车是空的');return}
-  const note=document.getElementById('cartNote').value.trim();
-  let text='【内容车提交】\n\n备注：'+note+'\n\n--- 内容列表 ---\n\n';
-  cart.items.forEach((item,i)=>{text+=`${i+1}. ${item.title}\n   作者：${item.authorName}\n   描述：${item.description}\n\n`});
-  if(navigator.share){navigator.share({title:'来自不老投资人的内容车',text}).catch(()=>{})}
-  else{
-    const ta=document.createElement('textarea');
-    ta.value=text;document.body.appendChild(ta);ta.select();
-    try{document.execCommand('copy');showToast('内容已复制到剪贴板')}catch(e){showToast('复制失败')}
-    document.body.removeChild(ta);
+    `).join('');
+  } catch(e) {
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无专利数据</div>';
   }
-  cart.clear();updateCartBadge();renderCart();showToast('内容车已提交，感谢反馈！');
 }
 
-function sendMessage(){
-  const input=document.getElementById('chatInput');
-  const text=input.value.trim();
-  if(!text)return;
-  const container=document.getElementById('chatMessages');
-  container.innerHTML+=`<div class="chat-msg user">${text}<div class="sender">我</div></div>`;
-  input.value='';
-  container.scrollTop=container.scrollHeight;
-  setTimeout(()=>{
-    container.innerHTML+=`<div class="chat-msg investor">感谢您的留言，我会尽快回复您！<div class="sender">不老投资人</div></div>`;
-    container.scrollTop=container.scrollHeight;
-  },1000);
-}
-
-function publishContent(){
-  const title=document.getElementById('pubTitle').value.trim();
-  const content=document.getElementById('pubContent').value.trim();
-  if(!title||!content){showToast('请填写标题和内容');return}
-  const tag=document.getElementById('pubTag').value.trim();
-  let text='【用户发布】\n\n标题：'+title+'\n'+(tag?'标签：'+tag+'\n':'')+'\n'+content+'\n\n--- 来自不老投资人App ---';
-  if(navigator.share){navigator.share({title:'用户发布：'+title,text}).catch(()=>{})}
-  else{
-    const ta=document.createElement('textarea');
-    ta.value=text;document.body.appendChild(ta);ta.select();
-    try{document.execCommand('copy');showToast('内容已复制到剪贴板')}catch(e){showToast('发布失败')}
-    document.body.removeChild(ta);
+function switchPatentTab(tab, el) {
+  document.querySelectorAll('.patent-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  if (tab === 'list') {
+    document.getElementById('patentList').style.display = 'block';
+    renderPatentList();
+  } else {
+    document.getElementById('patentList').style.display = 'none';
+    navigateTo('patent-upload');
   }
-  document.getElementById('pubTitle').value='';
-  document.getElementById('pubContent').value='';
-  document.getElementById('pubTag').value='';
-  showToast('发布成功！');
 }
+switchPatentTab('list', document.querySelector('.patent-tab'));
 
 // Init
-renderFeed();
-updateCartBadge();
-document.getElementById('welcomeDialog').style.display='flex';
+loadFeed();
+renderContactPage();
 </script>
 </body>
 </html>
