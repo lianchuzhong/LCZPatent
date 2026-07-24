@@ -6,16 +6,16 @@ const fs = require('fs');
 const app = express();
 const PORT = 3000;
 
-const patentDir = 'C:\\Users\\Administrator\\Desktop\\patent_uploads';
-const dataDir = 'C:\\Users\\Administrator\\Desktop\\patent_data';
+const productDir = 'C:\\Users\\Administrator\\Desktop\\product_uploads';
+const dataDir = 'C:\\Users\\Administrator\\Desktop\\product_data';
 const uploadsDir = path.join(__dirname, 'uploads');
 
-if (!fs.existsSync(patentDir)) fs.mkdirSync(patentDir, { recursive: true });
+if (!fs.existsSync(productDir)) fs.mkdirSync(productDir, { recursive: true });
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, patentDir),
+  destination: (req, file, cb) => cb(null, productDir),
   filename: (req, file, cb) => {
     const timestamp = Date.now();
     const safeName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
@@ -38,32 +38,32 @@ function writeJSON(filename, data) {
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   fs.writeFileSync(path.join(dataDir, filename), JSON.stringify(data, null, 2), 'utf-8');
 }
-function syncPatentsToData() {
-  const files = fs.readdirSync(patentDir).filter(f => f.endsWith('.json'));
-  const patents = files.map(f => JSON.parse(fs.readFileSync(path.join(patentDir, f), 'utf-8')))
+function syncProductsToData() {
+  const files = fs.readdirSync(productDir).filter(f => f.endsWith('.json'));
+  const products = files.map(f => JSON.parse(fs.readFileSync(path.join(productDir, f), 'utf-8')))
     .sort((a, b) => b.timestamp - a.timestamp);
-  writeJSON('patents.json', patents);
+  writeJSON('products.json', products);
 }
 
-// ============ PATENTS ============
-app.get('/api/patents', (req, res) => {
+// ============ PRODUCTS ============
+app.get('/api/products', (req, res) => {
   try {
-    const files = fs.readdirSync(patentDir).filter(f => f.endsWith('.json'));
-    const patents = files.map(f => {
-      const data = fs.readFileSync(path.join(patentDir, f), 'utf-8');
+    const files = fs.readdirSync(productDir).filter(f => f.endsWith('.json'));
+    const products = files.map(f => {
+      const data = fs.readFileSync(path.join(productDir, f), 'utf-8');
       return JSON.parse(data);
     }).sort((a, b) => b.timestamp - a.timestamp);
-    res.json(patents);
+    res.json(products);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-app.get('/api/patents/:id', (req, res) => {
+app.get('/api/products/:id', (req, res) => {
   try {
-    const files = fs.readdirSync(patentDir).filter(f => f.endsWith('.json'));
+    const files = fs.readdirSync(productDir).filter(f => f.endsWith('.json'));
     for (const f of files) {
-      const data = JSON.parse(fs.readFileSync(path.join(patentDir, f), 'utf-8'));
+      const data = JSON.parse(fs.readFileSync(path.join(productDir, f), 'utf-8'));
       if (data.id === req.params.id) return res.json(data);
     }
     res.status(404).json({ error: '未找到' });
@@ -72,28 +72,28 @@ app.get('/api/patents/:id', (req, res) => {
   }
 });
 
-app.put('/api/patents/:id', upload.fields([
+app.put('/api/products/:id', upload.fields([
   { name: 'file', maxCount: 1 },
   { name: 'image', maxCount: 1 }
 ]), (req, res) => {
   try {
-    const files = fs.readdirSync(patentDir).filter(f => f.endsWith('.json'));
+    const files = fs.readdirSync(productDir).filter(f => f.endsWith('.json'));
     for (const f of files) {
-      const data = JSON.parse(fs.readFileSync(path.join(patentDir, f), 'utf-8'));
+      const data = JSON.parse(fs.readFileSync(path.join(productDir, f), 'utf-8'));
       if (data.id === req.params.id) {
-        const { title, description, applicant, inventor, patentNumber, applicationDate } = req.body;
+        const { title, description, applicant, inventor, productNumber, applicationDate } = req.body;
         if (title) data.title = title;
         if (description) data.description = description;
         if (applicant !== undefined) data.applicant = applicant;
         if (inventor !== undefined) data.inventor = inventor;
-        if (patentNumber !== undefined) data.patentNumber = patentNumber;
+        if (productNumber !== undefined) data.productNumber = productNumber;
         if (applicationDate !== undefined) data.applicationDate = applicationDate;
         data.timestamp = Date.now();
         if (req.files?.file?.[0]) data.file = { name: req.files.file[0].originalname, path: req.files.file[0].filename };
         if (req.files?.image?.[0]) data.image = { name: req.files.image[0].originalname, path: req.files.image[0].filename };
-        fs.writeFileSync(path.join(patentDir, f), JSON.stringify(data, null, 2), 'utf-8');
-        syncPatentsToData();
-        return res.json({ success: true, patent: data });
+        fs.writeFileSync(path.join(productDir, f), JSON.stringify(data, null, 2), 'utf-8');
+        syncProductsToData();
+        return res.json({ success: true, product: data });
       }
     }
     res.status(404).json({ error: '未找到' });
@@ -102,14 +102,14 @@ app.put('/api/patents/:id', upload.fields([
   }
 });
 
-app.delete('/api/patents/:id', (req, res) => {
+app.delete('/api/products/:id', (req, res) => {
   try {
-    const files = fs.readdirSync(patentDir).filter(f => f.endsWith('.json'));
+    const files = fs.readdirSync(productDir).filter(f => f.endsWith('.json'));
     for (const f of files) {
-      const data = JSON.parse(fs.readFileSync(path.join(patentDir, f), 'utf-8'));
+      const data = JSON.parse(fs.readFileSync(path.join(productDir, f), 'utf-8'));
       if (data.id === req.params.id) {
-        fs.unlinkSync(path.join(patentDir, f));
-        syncPatentsToData();
+        fs.unlinkSync(path.join(productDir, f));
+        syncProductsToData();
         return res.json({ success: true });
       }
     }
@@ -119,27 +119,27 @@ app.delete('/api/patents/:id', (req, res) => {
   }
 });
 
-app.post('/api/upload-patent', upload.fields([
+app.post('/api/upload-product', upload.fields([
   { name: 'file', maxCount: 1 },
   { name: 'image', maxCount: 1 }
 ]), (req, res) => {
   try {
-    const { title, description, applicant, inventor, patentNumber, applicationDate } = req.body;
+    const { title, description, applicant, inventor, productNumber, applicationDate } = req.body;
     if (!title || !description) {
       return res.status(400).json({ error: '标题和描述为必填项' });
     }
-    const patent = {
+    const product = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       title, description,
       applicant: applicant || '', inventor: inventor || '',
-      patentNumber: patentNumber || '', applicationDate: applicationDate || '',
+      productNumber: productNumber || '', applicationDate: applicationDate || '',
       timestamp: Date.now(),
       file: req.files?.file?.[0] ? { name: req.files.file[0].originalname, path: req.files.file[0].filename } : null,
       image: req.files?.image?.[0] ? { name: req.files.image[0].originalname, path: req.files.image[0].filename } : null
     };
-    fs.writeFileSync(path.join(patentDir, `patent_${patent.id}.json`), JSON.stringify(patent, null, 2), 'utf-8');
-    syncPatentsToData();
-    res.json({ success: true, patent });
+    fs.writeFileSync(path.join(productDir, `product_${product.id}.json`), JSON.stringify(product, null, 2), 'utf-8');
+    syncProductsToData();
+    res.json({ success: true, product });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -347,6 +347,6 @@ app.put('/api/user-posts/:id/approve', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`世界专利服务器启动: http://localhost:${PORT}`);
+  console.log(`世界实物服务器启动: http://localhost:${PORT}`);
   console.log(`数据目录: ${dataDir}`);
 });

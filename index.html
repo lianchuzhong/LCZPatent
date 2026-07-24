@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>世界专利库 - World Patent Collection</title>
+<title>世界实物库 - World Product Collection</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#F8F8F6;--card:#FFFFFF;--text:#1C1C1E;--text2:#9E9E9E;--gold:#D4AF37;--divider:#E5E5E5;--icon:#BDBDBD;--skeleton:#F0F0F0}
@@ -79,16 +79,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .contact-card .action-btn:hover{background:var(--gold);color:white}
 .contact-divider{text-align:center;padding:16px 0;color:var(--text2);font-size:12px;display:flex;align-items:center;gap:12px}
 .contact-divider::before,.contact-divider::after{content:'';flex:1;height:1px;background:var(--divider)}
-/* Patent */
-.patent-page{padding:20px 20px 100px}
+/* Product */
+.product-page{padding:20px 20px 100px}
 
-.patent-list{display:flex;flex-direction:column;gap:12px;padding:16px 0}
-.patent-card{background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--divider);cursor:pointer;transition:transform 0.2s}
-.patent-card:hover{transform:translateY(-2px)}
-.patent-card h3{font-size:16px;font-family:Georgia,'Times New Roman',serif;color:var(--text);margin-bottom:6px}
-.patent-card .meta{font-size:12px;color:var(--text2);margin-bottom:8px}
-.patent-card .desc{font-size:13px;color:var(--text);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.patent-card .tag{display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(212,175,55,0.1);color:var(--gold);font-size:11px;margin-top:8px}
+.product-list{display:flex;flex-direction:column;gap:12px;padding:16px 0}
+.product-card{background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--divider);cursor:pointer;transition:transform 0.2s}
+.product-card:hover{transform:translateY(-2px)}
+.product-card h3{font-size:16px;font-family:Georgia,'Times New Roman',serif;color:var(--text);margin-bottom:6px}
+.product-card .meta{font-size:12px;color:var(--text2);margin-bottom:8px}
+.product-card .desc{font-size:13px;color:var(--text);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.product-card .tag{display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(212,175,55,0.1);color:var(--gold);font-size:11px;margin-top:8px}
 
 /* Dialog */
 .dialog-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
@@ -110,37 +110,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div id="toast" class="toast"></div>
 
   <!-- ===== PATENT PAGE (default landing) ===== -->
-  <div id="page-patent" class="page active">
+  <div id="page-product" class="page active">
     <div class="header">
-      <h1>世界专利</h1>
+      <h1>世界实物</h1>
       <div class="header-actions"></div>
     </div>
-    <div class="search-bar"><input type="text" placeholder="搜索专利关键词..." id="searchInput" oninput="searchPatents(this.value)"></div>
-    <div id="patentList" class="patent-list"></div>
+    <div class="search-bar"><input type="text" placeholder="搜索实物关键词..." id="searchInput" oninput="searchProducts(this.value)"></div>
+    <div id="productList" class="product-list"></div>
   </div>
 
   <!-- ===== DETAIL PAGE ===== -->
   <div id="page-detail" class="page">
     <div class="detail-header">
-      <svg class="back" onclick="navigateTo('patent')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <h2>专利详情</h2>
+      <svg class="back" onclick="navigateTo('product')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <h2>实物详情</h2>
     </div>
     <div class="detail-image" id="detailImage"><span>📄</span></div>
     <div class="detail-body">
-      <h2 id="detailTitle">专利详情</h2>
+      <h2 id="detailTitle">实物详情</h2>
       <div class="detail-author">
         <div class="avatar"></div>
         <div class="info"><div class="name" id="detailAuthor">连楚钟</div><div class="date" id="detailDate">2024年1月</div></div>
       </div>
       <div class="detail-divider"></div>
-      <div class="detail-content" id="detailContent">专利技术内容详情。</div>
+      <div class="detail-content" id="detailContent">实物技术内容详情。</div>
       <div class="detail-actions">
         <span id="detailLike"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg> 赞</span>
         <span id="detailComment"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 评论</span>
         <span id="detailCollect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> 收藏</span>
         <span id="detailShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> 分享</span>
       </div>
-      <div class="detail-contact" onclick="navigateTo('contact')">联系专利持有人 · 联系方式 →</div>
+      <div class="detail-contact" onclick="navigateTo('contact')">联系实物持有人 · 联系方式 →</div>
     </div>
   </div>
 
@@ -153,24 +153,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <p>选择您喜欢的方式与我联系 · Looking forward to collaborating</p>
       </div>
       <div style="background:var(--card);border-radius:16px;padding:24px;margin-bottom:24px;border:1px solid var(--gold);text-align:center">
-        <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--gold);margin-bottom:16px">🌍 世界专利库 · 使命宣言</h2>
+        <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--gold);margin-bottom:16px">🌍 世界实物库 · 使命宣言</h2>
         <p style="font-size:15px;line-height:1.8;color:var(--text);margin-bottom:12px">大家好，我是造物主连楚钟，本网站3条使命：</p>
         <div style="text-align:left;max-width:500px;margin:0 auto">
           <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">1️⃣ 寻找并创造神的力量服务科学</p>
-          <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">2️⃣ 给创造发明家一个家，不管专利发明者学历高低</p>
+          <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">2️⃣ 给创造发明家一个家，不管实物发明者学历高低</p>
           <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">3️⃣ 合法合规合理获得授权费，禁止用于非法破坏活动</p>
-          <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">4️⃣ 专利发明者可以终身获得专利收益并且继承给下一代，通过本网站向全球推广不受区域限制</p>
+          <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">4️⃣ 实物发明者可以终身获得收益并且继承给下一代，通过本网站向全球推广不受区域限制</p>
         </div>
         <p style="font-size:13px;color:var(--text2);margin-top:16px;padding-top:12px;border-top:1px solid var(--divider)">所有使用者和参与者默认同意并遵守使用协议，违法者付出严重代价</p>
       </div>
       <div style="background:var(--card);border-radius:16px;padding:24px;margin-bottom:24px;border:1px solid var(--gold);text-align:center">
-        <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--gold);margin-bottom:16px">🌍 World Patent · Mission Statement</h2>
+        <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:22px;color:var(--gold);margin-bottom:16px">🌍 World Product · Mission Statement</h2>
         <p style="font-size:15px;line-height:1.8;color:var(--text);margin-bottom:12px">Hello everyone, I am the creator Lian Chuzhong. This website has 4 missions:</p>
         <div style="text-align:left;max-width:500px;margin:0 auto">
           <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">1️⃣ Seek and create the power of divinity in service of science</p>
           <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">2️⃣ Provide a home for inventors and creators, regardless of educational background</p>
           <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">3️⃣ Obtain licensing fees legally, legitimately, and fairly — prohibited for illegal or destructive activities</p>
-          <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">4️⃣ Patent inventors receive lifetime royalty income, inheritable by future generations, promoted globally through this website without regional restrictions</p>
+          <p style="font-size:14px;line-height:1.7;color:var(--text);padding:6px 0">4️⃣ Product creators receive lifetime royalty income, inheritable by future generations, promoted globally through this website without regional restrictions</p>
         </div>
         <p style="font-size:13px;color:var(--text2);margin-top:16px;padding-top:12px;border-top:1px solid var(--divider)">All users and participants agree to and comply with the terms of use. Violators will face serious consequences.</p>
       </div>
@@ -181,9 +181,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
-    <div class="nav-item active" onclick="navigateTo('patent')">
+    <div class="nav-item active" onclick="navigateTo('product')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
-      <span>专利</span>
+      <span>实物</span>
     </div>
 
     <div class="nav-item" onclick="navigateTo('contact')">
@@ -204,7 +204,7 @@ const RAW = `https://raw.githubusercontent.com/${GIT_OWNER}/${GIT_REPO}/${GIT_BR
 // ===== DATA =====
 let feedItems = [];
 
-const defaultPatents = [
+const defaultProducts = [
   {id:'demo1',title:'一种新型太阳能电池板',description:'本发明涉及一种高效太阳能电池板，通过多层纳米结构提高光电转换效率，适用于户用和工业光伏发电系统。',author:'匿名',promoted:true,imageUrl:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=500&fit=crop',timestamp:1710000000000},
   {id:'demo2',title:'智能水质监测系统',description:'一种基于物联网的实时水质监测装置，可同时检测pH值、浊度、余氯等多项指标，数据自动上传至云端。',author:'匿名',promoted:false,imageUrl:'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=500&fit=crop',timestamp:1710000001000},
   {id:'demo3',title:'模块化建筑结构',description:'一种可快速组装的模块化建筑结构，采用预制构件和标准化连接节点，大幅缩短施工周期。',author:'匿名',promoted:false,imageUrl:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=500&fit=crop',timestamp:1710000002000},
@@ -218,23 +218,23 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 function navigateTo(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  if(page==='patent'){document.getElementById('page-patent').classList.add('active');navActive(0);loadPatents()}
+  if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(0);loadProducts()}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
   else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(1);renderContactPage()}
 }
 function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
 
 // ===== FEED =====
-function searchPatents(query) {
-  const container = document.getElementById('patentList');
-  if (!query.trim()) { renderPatentList(); return }
+function searchProducts(query) {
+  const container = document.getElementById('productList');
+  if (!query.trim()) { renderProductList(); return }
   const filtered = feedItems.filter(i => i.title.includes(query) || (i.description||'').includes(query));
   container.innerHTML = filtered.length
-    ? filtered.map(item => patentCard(item)).join('')
-    : '<div style="text-align:center;padding:40px;color:var(--text2)">未找到相关专利</div>';
+    ? filtered.map(item => productCard(item)).join('')
+    : '<div style="text-align:center;padding:40px;color:var(--text2)">未找到相关实物</div>';
 }
 
-function patentCard(item) {
+function productCard(item) {
   return `
     <div class="feed-card" style="margin-bottom:0;border-radius:16px" onclick="openDetail('${item.id}')">
       <div style="display:flex;gap:12px;padding:12px">
@@ -308,15 +308,15 @@ async function loadFeed(){
     const url = isGitHubPages ? RAW+'/feed.json' : '/api/feed';
     const res = await fetch(url);
     const data = await res.json();
-    feedItems = data.length > 0 ? data : defaultPatents;
-  } catch(e) { feedItems = defaultPatents }
-  renderPatentList();
+    feedItems = data.length > 0 ? data : defaultProducts;
+  } catch(e) { feedItems = defaultProducts }
+  renderProductList();
 }
 
-function renderPatentList(){
-  const container = document.getElementById('patentList');
-  if (!feedItems.length) { container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">暂无专利数据</div>'; return }
-  container.innerHTML = feedItems.map(item => patentCard(item)).join('');
+function renderProductList(){
+  const container = document.getElementById('productList');
+  if (!feedItems.length) { container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">暂无实物数据</div>'; return }
+  container.innerHTML = feedItems.map(item => productCard(item)).join('');
 }
 
 function openDetail(id){
@@ -334,28 +334,28 @@ function openDetail(id){
   navigateTo('detail');
 }
 
-async function loadPatents() {
-  const container = document.getElementById('patentList');
+async function loadProducts() {
+  const container = document.getElementById('productList');
   container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">加载中...</div>';
   try {
     const url = isGitHubPages ? RAW+'/patents.json' : '/api/patents';
     const res = await fetch(url);
-    const patents = await res.json();
-    if (!patents || patents.length===0) {
-      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无专利数据</div>';
+    const products = await res.json();
+    if (!products || products.length===0) {
+      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>';
       return;
     }
-    container.innerHTML = patents.map(p => `
-      <div class="patent-card">
+    container.innerHTML = products.map(p => `
+      <div class="product-card">
         <h3>${p.title}</h3>
-        <div class="meta">${p.applicant?'申请人: '+p.applicant:''}${p.patentNumber?' | 专利号: '+p.patentNumber:''}${p.applicationDate?' | '+p.applicationDate:''}</div>
+        <div class="meta">${p.applicant?'申请人: '+p.applicant:''}${p.patentNumber?' | 编号: '+p.patentNumber:''}${p.applicationDate?' | '+p.applicationDate:''}</div>
         <div class="desc">${p.description}</div>
         ${p.inventor?'<span class="tag">发明人: '+p.inventor+'</span>':''}
         ${p.file?'<span class="tag">📎 有附件</span>':''}
       </div>
     `).join('');
   } catch(e) {
-    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无专利数据</div>';
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>';
   }
 }
 
