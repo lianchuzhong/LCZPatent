@@ -780,12 +780,10 @@ const imageNames = ['2 (96).jpg',
 const LINGERIE_PAGE_SIZE = 20;
 let lingerieLoadedCount = 0;
 
-async function loadLingerieCatalog() {
+function loadLingerieCatalog() {
   lingerieLoadedCount = 0;
-  const grid = document.getElementById('lingerieGrid');
-  const stats = document.getElementById('lingerieStats');
-  stats.textContent = `共 ${imageNames.length} 张图片 · 每次加载20张`;
-  grid.innerHTML = '';
+  document.getElementById('lingerieGrid').innerHTML = '';
+  document.getElementById('lingerieStats').textContent = '共 ' + imageNames.length + ' 张图片 · 每次加载20张';
   loadMoreLingerie();
 }
 
@@ -794,28 +792,32 @@ function loadMoreLingerie() {
   const stats = document.getElementById('lingerieStats');
   const start = lingerieLoadedCount;
   const end = Math.min(start + LINGERIE_PAGE_SIZE, imageNames.length);
-  
-  let html = '';
   for (let i = start; i < end; i++) {
     const name = imageNames[i];
-    const cleanName = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
-    html += '<div class="lingerie-item"><img src="' + LINGERIE_IMG_BASE + '/' + encodeURIComponent(name) + '" alt="' + cleanName + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div style=padding:40px;text-align:center;color:var(--text2)>\u52a0\u8f7d\u5931\u8d25</div>\'"></div>';
+    const div = document.createElement('div');
+    div.className = 'lingerie-item';
+    const img = document.createElement('img');
+    img.src = LINGERIE_IMG_BASE + '/' + encodeURIComponent(name);
+    img.alt = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
+    img.loading = 'lazy';
+    img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    div.appendChild(img);
+    grid.appendChild(div);
   }
-  grid.innerHTML += html;
   lingerieLoadedCount = end;
-  
-  stats.textContent = `\u5df2\u52a0\u8f7d ${end}/${imageNames.length} \u5f20\u56fe\u7247`;
-  
-  // Add load more button if there are more images
-  const existingBtn = document.getElementById('loadMoreBtn');
-  if (existingBtn) existingBtn.remove();
-  
+  stats.textContent = '已加载 ' + end + '/' + imageNames.length + ' 张图片';
+  const oldBtn = document.getElementById('loadMoreBtn');
+  if (oldBtn) oldBtn.remove();
   if (end < imageNames.length) {
-    const btn = document.createElement('div');
-    btn.id = 'loadMoreBtn';
-    btn.style.cssText = 'text-align:center;padding:20px';
-    btn.innerHTML = '<button onclick="loadMoreLingerie()" style="padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif">\u52a0\u8f7d\u66f4\u591a (\u5269\u4f59 ' + (imageNames.length - end) + ' \u5f20)</button>';
-    grid.parentElement.appendChild(btn);
+    const wrap = document.createElement('div');
+    wrap.id = 'loadMoreBtn';
+    wrap.style.cssText = 'text-align:center;padding:20px';
+    const btn = document.createElement('button');
+    btn.textContent = '加载更多 (剩余 ' + (imageNames.length - end) + ' 张)';
+    btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
+    btn.onclick = loadMoreLingerie;
+    wrap.appendChild(btn);
+    grid.parentElement.appendChild(wrap);
   }
 }// Init
 loadFeed();
