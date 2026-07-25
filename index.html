@@ -85,7 +85,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .lingerie-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
 .lingerie-hero p{font-size:14px;color:var(--text2);margin-top:4px}
 .lingerie-stats{text-align:center;font-size:12px;color:var(--text2);margin-bottom:16px}
+/* Lingerie Catalog */
+.lingerie-page{padding:20px 20px 100px}
+.lingerie-hero{text-align:center;padding:16px 0 20px}
+.lingerie-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
+.lingerie-hero p{font-size:14px;color:var(--text2);margin-top:4px}
+.lingerie-stats{text-align:center;font-size:12px;color:var(--text2);margin-bottom:16px}
 .lingerie-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(min-width:768px){.lingerie-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+.lingerie-item{background:var(--card);border-radius:12px;overflow:hidden;break-inside:avoid}
+.lingerie-item img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
 @media(min-width:768px){.lingerie-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
 .lingerie-item{background:var(--card);border-radius:12px;overflow:hidden;break-inside:avoid}
 .lingerie-item img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
@@ -768,15 +777,46 @@ const imageNames = ['2 (96).jpg',
 '2 (608).jpg'
 ];
 
+const LINGERIE_PAGE_SIZE = 20;
+let lingerieLoadedCount = 0;
+
 async function loadLingerieCatalog() {
+  lingerieLoadedCount = 0;
   const grid = document.getElementById('lingerieGrid');
   const stats = document.getElementById('lingerieStats');
-  stats.textContent = `共 ${imageNames.length} 张图片 · Women's Underwear Collection`;
-  grid.innerHTML = imageNames.map((name, i) => {
-    const ext = name.split('.').pop();
+  stats.textContent = `共 ${imageNames.length} 张图片 · 每次加载20张`;
+  grid.innerHTML = '';
+  loadMoreLingerie();
+}
+
+function loadMoreLingerie() {
+  const grid = document.getElementById('lingerieGrid');
+  const stats = document.getElementById('lingerieStats');
+  const start = lingerieLoadedCount;
+  const end = Math.min(start + LINGERIE_PAGE_SIZE, imageNames.length);
+  
+  let html = '';
+  for (let i = start; i < end; i++) {
+    const name = imageNames[i];
     const cleanName = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
-    return `<div class="lingerie-item"><img src="${LINGERIE_IMG_BASE}/${encodeURIComponent(name)}" alt="${cleanName}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'"></div>`;
-  }).join('');
+    html += '<div class="lingerie-item"><img src="' + LINGERIE_IMG_BASE + '/' + encodeURIComponent(name) + '" alt="' + cleanName + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div style=padding:40px;text-align:center;color:var(--text2)>\u52a0\u8f7d\u5931\u8d25</div>\'"></div>';
+  }
+  grid.innerHTML += html;
+  lingerieLoadedCount = end;
+  
+  stats.textContent = `\u5df2\u52a0\u8f7d ${end}/${imageNames.length} \u5f20\u56fe\u7247`;
+  
+  // Add load more button if there are more images
+  const existingBtn = document.getElementById('loadMoreBtn');
+  if (existingBtn) existingBtn.remove();
+  
+  if (end < imageNames.length) {
+    const btn = document.createElement('div');
+    btn.id = 'loadMoreBtn';
+    btn.style.cssText = 'text-align:center;padding:20px';
+    btn.innerHTML = '<button onclick="loadMoreLingerie()" style="padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif">\u52a0\u8f7d\u66f4\u591a (\u5269\u4f59 ' + (imageNames.length - end) + ' \u5f20)</button>';
+    grid.parentElement.appendChild(btn);
+  }
 }// Init
 loadFeed();
 renderContactPage();
