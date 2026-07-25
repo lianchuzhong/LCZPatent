@@ -79,6 +79,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .contact-card .action-btn:hover{background:var(--gold);color:white}
 .contact-divider{text-align:center;padding:16px 0;color:var(--text2);font-size:12px;display:flex;align-items:center;gap:12px}
 .contact-divider::before,.contact-divider::after{content:'';flex:1;height:1px;background:var(--divider)}
+/* Lingerie Catalog */
+.lingerie-page{padding:20px 20px 100px}
+.lingerie-hero{text-align:center;padding:16px 0 20px}
+.lingerie-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
+.lingerie-hero p{font-size:14px;color:var(--text2);margin-top:4px}
+.lingerie-stats{text-align:center;font-size:12px;color:var(--text2);margin-bottom:16px}
+.lingerie-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(min-width:768px){.lingerie-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+.lingerie-item{background:var(--card);border-radius:12px;overflow:hidden;break-inside:avoid}
+.lingerie-item img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
+.lingerie-item .name{padding:6px 10px;font-size:12px;color:var(--text2);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Product */
 .product-page{padding:20px 20px 100px}
 
@@ -192,6 +203,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 
 
+  <!-- ===== LINGERIE CATALOG PAGE ===== -->
+  <div id="page-lingerie" class="page">
+    <div class="header">
+      <h1>女士内衣裤</h1>
+      <div class="header-actions"></div>
+    </div>
+    <div class="lingerie-page">
+      <div class="lingerie-hero">
+        <h1>女士内衣裤 · 实物展示</h1>
+        <p>女士内衣裤分类实物图片展示 Women's Underwear Collection</p>
+      </div>
+      <div id="lingerieStats" class="lingerie-stats">加载中...</div>
+      <div id="lingerieGrid" class="lingerie-grid"></div>
+    </div>
+  </div>
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <div class="nav-item active" onclick="navigateTo('product')">
@@ -199,7 +225,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <span>实物</span>
     </div>
 
-    <div class="nav-item" onclick="navigateTo('contact')">
+        <div class="nav-item" onclick="navigateTo('lingerie')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      <span>内衣裤</span>
+    </div>
+<div class="nav-item" onclick="navigateTo('contact')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       <span>联系方式</span>
     </div>
@@ -210,7 +240,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 // ===== CONFIG =====
 const isGitHubPages = location.hostname.includes('github.io');
 const GIT_OWNER = 'lianchuzhong';
-const GIT_REPO = 'worldPatent';
+const GIT_REPO = 'LCZPatent';
 const GIT_BRANCH = 'main';
 const RAW = `https://raw.githubusercontent.com/${GIT_OWNER}/${GIT_REPO}/${GIT_BRANCH}/data`;
 
@@ -233,7 +263,7 @@ function navigateTo(page){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(0);loadProducts()}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
-  else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(1);renderContactPage()}
+  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(1);loadLingerieCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(2);renderContactPage()}
 }
 function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
 
@@ -372,9 +402,387 @@ async function loadProducts() {
   }
 }
 
+
+// ===== LINGERIE CATALOG =====
+const LINGERIE_IMG_BASE = isGitHubPages
+  ? `https://raw.githubusercontent.com/${GIT_OWNER}/${GIT_REPO}/${GIT_BRANCH}/data/images/女士内衣裤`
+  : '/data/images/女士内衣裤';
+
+const imageNames = ['2 (96).jpg',
+'2 (1).jpg',
+'2 (2).jpg',
+'2 (3).jpg',
+'2 (4).jpg',
+'2 (5).jpg',
+'2 (6).jpg',
+'2 (7).jpg',
+'2 (10).jpg',
+'2 (11).jpg',
+'2 (14).jpg',
+'2 (16).jpg',
+'2 (17).jpg',
+'2 (18).jpg',
+'2 (19).jpg',
+'2 (23).jpg',
+'2 (25).jpg',
+'2 (27).jpg',
+'2 (28).jpg',
+'2 (29).jpg',
+'2 (30).jpg',
+'2 (31).jpg',
+'2 (33).jpg',
+'2 (35).jpg',
+'2 (36).jpg',
+'2 (39).jpg',
+'2 (40).jpg',
+'2 (41).jpg',
+'2 (42).jpg',
+'2 (43).jpg',
+'2 (44).jpg',
+'2 (45).jpg',
+'2 (46).jpg',
+'2 (47).jpg',
+'2 (48).jpg',
+'2 (49).jpg',
+'2 (50).jpg',
+'2 (51).jpg',
+'2 (52).jpg',
+'2 (54).jpg',
+'2 (55).jpg',
+'2 (56).jpg',
+'2 (57).jpg',
+'2 (58).jpg',
+'2 (59).jpg',
+'2 (60).jpg',
+'2 (61).jpg',
+'2 (62).jpg',
+'2 (64).jpg',
+'2 (65).jpg',
+'2 (67).jpg',
+'2 (68).jpg',
+'2 (69).jpg',
+'2 (70).jpg',
+'2 (71).jpg',
+'2 (72).jpg',
+'2 (73).jpg',
+'2 (74).jpg',
+'2 (75).jpg',
+'2 (76).jpg',
+'2 (77).jpg',
+'2 (79).jpg',
+'2 (80).jpg',
+'2 (81).jpg',
+'2 (82).jpg',
+'2 (83).jpg',
+'2 (84).jpg',
+'2 (85).jpg',
+'2 (86).jpg',
+'2 (88).jpg',
+'2 (90).jpg',
+'2 (92).jpg',
+'2 (93).jpg',
+'2 (95).jpg',
+'2 (133).jpg',
+'2 (134).jpg',
+'2 (135).jpg',
+'2 (140).jpg',
+'2 (142).jpg',
+'2 (144).jpg',
+'2 (145).jpg',
+'2 (148).jpg',
+'2 (149).jpg',
+'2 (150).jpg',
+'2 (152).jpg',
+'2 (154).jpg',
+'2 (155).jpg',
+'2 (156).jpg',
+'2 (157).jpg',
+'2 (158).jpg',
+'2 (159).jpg',
+'2 (160).jpg',
+'2 (161).jpg',
+'2 (162).jpg',
+'2 (163).jpg',
+'2 (164).jpg',
+'2 (167).jpg',
+'2 (170).jpg',
+'2 (171).jpg',
+'2 (172).jpg',
+'2 (173).jpg',
+'2 (175).jpg',
+'2 (176).jpg',
+'2 (177).jpg',
+'2 (178).jpg',
+'2 (179).jpg',
+'2 (181).jpg',
+'2 (182).jpg',
+'2 (185).jpg',
+'2 (12).png',
+'2 (26).jpg',
+'2 (37).jpg',
+'2 (91).jpg',
+'2 (99).jpg',
+'2 (100).jpg',
+'2 (103).jpg',
+'2 (104).jpg',
+'2 (106).jpg',
+'2 (107).jpg',
+'2 (108).jpg',
+'2 (110).jpg',
+'2 (111).jpg',
+'2 (112).jpg',
+'2 (116).jpg',
+'2 (117).jpg',
+'2 (118).jpg',
+'2 (120).jpg',
+'2 (122).jpg',
+'2 (124).jpg',
+'2 (126).jpg',
+'2 (127).jpg',
+'2 (128).jpg',
+'2 (130).jpg',
+'2 (131).jpg',
+'2 (380).jpg',
+'2 (315).jpg',
+'2 (316).jpg',
+'2 (318).jpg',
+'2 (319).jpg',
+'2 (320).jpg',
+'2 (321).jpg',
+'2 (322).jpg',
+'2 (324).jpg',
+'2 (325).jpg',
+'2 (326).jpg',
+'2 (327).jpg',
+'2 (328).jpg',
+'2 (329).jpg',
+'2 (331).jpg',
+'2 (333).jpg',
+'2 (334).jpg',
+'2 (337).jpg',
+'2 (338).jpg',
+'2 (340).jpg',
+'2 (341).jpg',
+'2 (342).jpg',
+'2 (343).jpg',
+'2 (344).jpg',
+'2 (346).jpg',
+'2 (348).jpg',
+'2 (350).jpg',
+'2 (353).jpg',
+'2 (354).jpg',
+'2 (355).jpg',
+'2 (358).jpg',
+'2 (359).jpg',
+'2 (361).jpg',
+'2 (362).jpg',
+'2 (363).jpg',
+'2 (365).jpg',
+'2 (366).jpg',
+'2 (369).jpg',
+'2 (370).jpg',
+'2 (371).jpg',
+'2 (372).jpg',
+'2 (373).jpg',
+'2 (374).jpg',
+'2 (376).jpg',
+'2 (377).jpg',
+'2 (378).jpg',
+'2 (379).jpg',
+'2 (242).jpg',
+'2 (243).jpg',
+'2 (245).jpg',
+'2 (105).jpg',
+'2 (113).jpg',
+'2 (119).jpg',
+'2 (146).jpg',
+'2 (184).jpg',
+'2 (187).jpg',
+'2 (188).jpg',
+'2 (189).jpg',
+'2 (190).jpg',
+'2 (191).jpg',
+'2 (193).jpg',
+'2 (195).jpg',
+'2 (196).jpg',
+'2 (197).jpg',
+'2 (198).jpg',
+'2 (199).jpg',
+'2 (201).jpg',
+'2 (202).jpg',
+'2 (205).jpg',
+'2 (206).jpg',
+'2 (207).jpg',
+'2 (208).jpg',
+'2 (209).jpg',
+'2 (210).jpg',
+'2 (211).jpg',
+'2 (212).jpg',
+'2 (213).jpg',
+'2 (216).jpg',
+'2 (218).jpg',
+'2 (219).jpg',
+'2 (220).jpg',
+'2 (221).jpg',
+'2 (222).jpg',
+'2 (223).jpg',
+'2 (224).jpg',
+'2 (225).jpg',
+'2 (226).jpg',
+'2 (227).jpg',
+'2 (228).jpg',
+'2 (229).jpg',
+'2 (230).jpg',
+'2 (231).jpg',
+'2 (235).jpg',
+'2 (236).jpg',
+'2 (237).jpg',
+'2 (238).jpg',
+'2 (239).jpg',
+'2 (240).jpg',
+'2 (241).jpg',
+'2 (392).jpg',
+'2 (246).jpg',
+'2 (249).jpg',
+'2 (250).jpg',
+'2 (251).jpg',
+'2 (252).jpg',
+'2 (253).jpg',
+'2 (254).jpg',
+'2 (255).jpg',
+'2 (256).jpg',
+'2 (257).jpg',
+'2 (259).jpg',
+'2 (260).jpg',
+'2 (263).jpg',
+'2 (264).jpg',
+'2 (268).jpg',
+'2 (269).jpg',
+'2 (270).jpg',
+'2 (271).jpg',
+'2 (272).jpg',
+'2 (273).jpg',
+'2 (274).jpg',
+'2 (275).jpg',
+'2 (277).jpg',
+'2 (278).jpg',
+'2 (280).jpg',
+'2 (281).jpg',
+'2 (282).jpg',
+'2 (283).jpg',
+'2 (284).jpg',
+'2 (285).jpg',
+'2 (287).jpg',
+'2 (288).jpg',
+'2 (289).jpg',
+'2 (290).jpg',
+'2 (292).jpg',
+'2 (293).jpg',
+'2 (295).jpg',
+'2 (297).jpg',
+'2 (298).jpg',
+'2 (299).jpg',
+'2 (300).jpg',
+'2 (303).jpg',
+'2 (306).jpg',
+'2 (307).jpg',
+'2 (309).jpg',
+'2 (311).jpg',
+'2 (312).jpg',
+'2 (314).jpg',
+'2 (317).jpg',
+'2 (345).jpg',
+'2 (381).jpg',
+'2 (382).jpg',
+'2 (383).jpg',
+'2 (385).jpg',
+'2 (386).jpg',
+'2 (387).jpg',
+'2 (388).jpg',
+'2 (390).jpg',
+'2 (391).jpg',
+'2 (421) - 副本.jpg',
+'2 (422) - 副本.jpg',
+'2 (393) - 副本.jpg',
+'2 (394) - 副本.jpg',
+'2 (395) - 副本.jpg',
+'2 (396) - 副本.jpg',
+'2 (398) - 副本.jpg',
+'2 (399) - 副本.jpg',
+'2 (400) - 副本.jpg',
+'2 (402) - 副本.jpg',
+'2 (404) - 副本.jpg',
+'2 (407) - 副本.jpg',
+'2 (408) - 副本.jpg',
+'2 (410) - 副本.jpg',
+'2 (413) - 副本.jpg',
+'2 (414) - 副本.jpg',
+'2 (415) - 副本.jpg',
+'2 (416) - 副本.jpg',
+'2 (417) - 副本.jpg',
+'2 (419) - 副本.jpg',
+'2 (420) - 副本.jpg',
+'2 (610).jpg',
+'2 (611).jpg',
+'2 (546).jpg',
+'2 (547).jpg',
+'2 (549).jpg',
+'2 (551).jpg',
+'2 (554).jpg',
+'2 (555).jpg',
+'2 (560).jpg',
+'2 (562).jpg',
+'2 (563).jpg',
+'2 (564).jpg',
+'2 (565).jpg',
+'2 (567).jpg',
+'2 (568).jpg',
+'2 (570).jpg',
+'2 (571).jpg',
+'2 (572).jpg',
+'2 (573).jpg',
+'2 (574).jpg',
+'2 (575).jpg',
+'2 (577).jpg',
+'2 (578).jpg',
+'2 (579).jpg',
+'2 (581).jpg',
+'2 (582).jpg',
+'2 (583).jpg',
+'2 (584).jpg',
+'2 (588).jpg',
+'2 (590).jpg',
+'2 (592).jpg',
+'2 (593).jpg',
+'2 (595).jpg',
+'2 (596).jpg',
+'2 (597).jpg',
+'2 (598).jpg',
+'2 (599).jpg',
+'2 (600).jpg',
+'2 (601).jpg',
+'2 (603).jpg',
+'2 (604).jpg',
+'2 (606).jpg',
+'2 (607).jpg',
+'2 (608).jpg'
+];
+
+async function loadLingerieCatalog() {
+  const grid = document.getElementById('lingerieGrid');
+  const stats = document.getElementById('lingerieStats');
+  stats.textContent = 共  张图片 · Women's Underwear Collection;
+  grid.innerHTML = imageNames.map((name, i) => {
+    const ext = name.split('.').pop();
+    const cleanName = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
+    return <div class="lingerie-item"><img src="/" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'"></div>;
+  }).join('');
+}
 // Init
 loadFeed();
 renderContactPage();
 </script>
 </body>
 </html>
+
+
