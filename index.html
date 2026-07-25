@@ -771,14 +771,13 @@ const imageNames = ['2 (96).jpg',
 async function loadLingerieCatalog() {
   const grid = document.getElementById('lingerieGrid');
   const stats = document.getElementById('lingerieStats');
-  stats.textContent = 共  张图片 · Women's Underwear Collection;
+  stats.textContent = `共 ${imageNames.length} 张图片 · Women's Underwear Collection`;
   grid.innerHTML = imageNames.map((name, i) => {
     const ext = name.split('.').pop();
     const cleanName = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
-    return <div class="lingerie-item"><img src="/" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'"></div>;
+    return `<div class="lingerie-item"><img src="${LINGERIE_IMG_BASE}/${encodeURIComponent(name)}" alt="${cleanName}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'"></div>`;
   }).join('');
-}
-// Init
+}// Init
 loadFeed();
 renderContactPage();
 </script>
