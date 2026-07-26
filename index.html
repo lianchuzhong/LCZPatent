@@ -10,18 +10,15 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 .serif{font-family:Georgia,'Times New Roman',serif}
 .page{display:none;padding-bottom:80px;min-height:100vh}.page.active{display:block}
-/* Header */
 .header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--bg);position:sticky;top:0;z-index:100}
 .header h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif}
 .header-actions{display:flex;align-items:center;gap:12px}
 .header-btn{width:28px;height:28px;position:relative;cursor:pointer;color:var(--icon)}
 .header-btn svg{width:100%;height:100%}
-/* Bottom Nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;align-items:center;padding:8px 0;border-top:1px solid var(--divider);z-index:200;padding-bottom:max(8px,env(safe-area-inset-bottom))}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;color:var(--icon);font-size:10px;background:none;border:none;padding:4px 12px}
 .nav-item svg{width:24px;height:24px}
 .nav-item.active{color:var(--gold)}.nav-item.active svg{color:var(--gold)}
-/* Feed */
 .feed-grid{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .feed-card{background:var(--card);border-radius:24px;overflow:hidden;break-inside:avoid;margin-bottom:0}
 .feed-card-img{width:100%;height:auto;aspect-ratio:3/4;background:var(--skeleton);display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:32px;position:relative;overflow:hidden}
@@ -38,12 +35,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .feed-card-footer .actions svg{width:20px;height:20px;color:var(--icon);cursor:pointer}
 .feed-card-footer .actions svg.active{color:var(--gold)}
 .page-content{padding:0 20px 20px}
-/* Search */
 .search-bar{padding:16px 20px;background:var(--bg);position:sticky;top:0;z-index:50}
 .search-bar input{width:100%;height:44px;border:none;border-radius:22px;background:var(--card);padding:0 16px;font-size:15px;color:var(--text);outline:none;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
 .search-bar input::placeholder{color:var(--text2)}
 .search-bar input:focus{box-shadow:0 1px 6px rgba(212,175,55,0.2)}
-/* Detail */
 .detail-header{display:flex;align-items:center;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:100}
 .detail-header .back{width:28px;height:28px;cursor:pointer;color:var(--text)}
 .detail-header h2{flex:1;text-align:center;font-size:18px;font-family:Georgia,'Times New Roman',serif}
@@ -62,8 +57,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .detail-actions span{display:flex;align-items:center;gap:6px;color:var(--text2);font-size:14px;cursor:pointer}
 .detail-actions span svg{width:18px;height:18px}
 .detail-contact{text-align:center;color:var(--gold);font-size:14px;cursor:pointer}
-
-/* Contact Page */
 .contact-page{padding:20px 20px 100px}
 .contact-hero{text-align:center;padding:32px 0 24px}
 .contact-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
@@ -79,13 +72,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .contact-card .action-btn:hover{background:var(--gold);color:white}
 .contact-divider{text-align:center;padding:16px 0;color:var(--text2);font-size:12px;display:flex;align-items:center;gap:12px}
 .contact-divider::before,.contact-divider::after{content:'';flex:1;height:1px;background:var(--divider)}
-/* Lingerie Catalog */
-.lingerie-page{padding:20px 20px 100px}
-.lingerie-hero{text-align:center;padding:16px 0 20px}
-.lingerie-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
-.lingerie-hero p{font-size:14px;color:var(--text2);margin-top:4px}
-.lingerie-stats{text-align:center;font-size:12px;color:var(--text2);margin-bottom:16px}
-/* Lingerie Catalog */
 .lingerie-page{padding:20px 20px 100px}
 .lingerie-hero{text-align:center;padding:16px 0 20px}
 .lingerie-hero h1{font-size:28px;font-weight:bold;font-family:Georgia,'Times New Roman',serif;color:var(--text)}
@@ -95,13 +81,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 @media(min-width:768px){.lingerie-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
 .lingerie-item{background:var(--card);border-radius:12px;overflow:hidden;break-inside:avoid}
 .lingerie-item img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
-@media(min-width:768px){.lingerie-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
-.lingerie-item{background:var(--card);border-radius:12px;overflow:hidden;break-inside:avoid}
-.lingerie-item img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}
 .lingerie-item .name{padding:6px 10px;font-size:12px;color:var(--text2);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* Product */
 .product-page{padding:20px 20px 100px}
-
 .product-list{display:flex;flex-direction:column;gap:12px;padding:16px 0}
 .product-card{background:var(--card);border-radius:16px;padding:16px;border:1px solid var(--divider);cursor:pointer;transition:transform 0.2s}
 .product-card:hover{transform:translateY(-2px)}
@@ -109,8 +90,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .product-card .meta{font-size:12px;color:var(--text2);margin-bottom:8px}
 .product-card .desc{font-size:13px;color:var(--text);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .product-card .tag{display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(212,175,55,0.1);color:var(--gold);font-size:11px;margin-top:8px}
-
-/* Dialog */
 .dialog-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
 .dialog-overlay.show{display:flex}
 .dialog{background:var(--card);border-radius:16px;padding:32px;max-width:360px;width:90%;text-align:center}
@@ -118,18 +97,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .dialog .divider{width:40px;height:1px;background:var(--divider);margin:0 auto 16px}
 .dialog p{font-size:16px;line-height:1.6;color:var(--text);font-family:Georgia,'Times New Roman',serif;margin-bottom:24px}
 .dialog button{padding:12px 32px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,'Times New Roman',serif}
-/* Toast */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 24px;border-radius:24px;font-size:14px;z-index:9999;display:none;animation:fadeIn 0.3s}
 @keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 </style>
 </head>
 <body>
-
 <div id="app">
-  <!-- Toast -->
   <div id="toast" class="toast"></div>
-
-  <!-- ===== PATENT PAGE (default landing) ===== -->
   <div id="page-product" class="page active">
     <div class="header">
       <h1>世界实物</h1>
@@ -138,8 +112,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="search-bar"><input type="text" placeholder="搜索实物关键词..." id="searchInput" oninput="searchProducts(this.value)"></div>
     <div id="productList" class="product-list"></div>
   </div>
-
-  <!-- ===== DETAIL PAGE ===== -->
   <div id="page-detail" class="page">
     <div class="detail-header">
       <svg class="back" onclick="navigateTo('product')" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -163,8 +135,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="detail-contact" onclick="navigateTo('contact')">联系实物持有人 · 联系方式 →</div>
     </div>
   </div>
-
-  <!-- ===== CONTACT PAGE ===== -->
   <div id="page-contact" class="page">
     <div class="header"><h1>联系方式</h1></div>
     <div class="contact-page" id="contactPage">
@@ -197,9 +167,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div style="background:var(--card);border-radius:16px;padding:24px;margin-bottom:24px;border:1px solid var(--divider);text-align:center">
         <img src="fukuangma.png" alt="福矿码" style="max-width:100%;border-radius:12px;display:block;margin:0 auto">
       </div>
-
       <div id="contactList"></div>
-
       <div style="background:var(--card);border-radius:16px;padding:24px;margin-top:24px;border:1px solid var(--divider);text-align:center">
         <h2 style="font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--gold);margin-bottom:16px">🔗 友情链接</h2>
         <div style="display:flex;flex-direction:column;gap:10px">
@@ -210,9 +178,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
     </div>
   </div>
-
-
-  <!-- ===== LINGERIE CATALOG PAGE ===== -->
   <div id="page-lingerie" class="page">
     <div class="header">
       <h1>女士内衣裤</h1>
@@ -227,35 +192,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div id="lingerieGrid" class="lingerie-grid"></div>
     </div>
   </div>
-  <!-- ===== BOTTOM NAV ===== -->
+  <div id="page-toys" class="page">
+    <div class="header">
+      <h1>儿童玩具</h1>
+      <div class="header-actions"></div>
+    </div>
+    <div class="lingerie-page">
+      <div class="lingerie-hero">
+        <h1>儿童玩具 · 实物展示</h1>
+        <p>儿童玩具分类实物图片展示 Children's Toys Collection</p>
+      </div>
+      <div id="toysStats" class="lingerie-stats">加载中...</div>
+      <div id="toysGrid" class="lingerie-grid"></div>
+    </div>
+  </div>
   <div class="bottom-nav">
     <div class="nav-item active" onclick="navigateTo('product')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
       <span>实物</span>
     </div>
-
-        <div class="nav-item" onclick="navigateTo('lingerie')">
+    <div class="nav-item" onclick="navigateTo('lingerie')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
       <span>内衣裤</span>
     </div>
-<div class="nav-item" onclick="navigateTo('contact')">
+    <div class="nav-item" onclick="navigateTo('toys')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      <span>儿童玩具</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('contact')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       <span>联系方式</span>
     </div>
   </div>
 </div>
-
 <script>
-// ===== CONFIG =====
 const isGitHubPages = location.hostname.includes('github.io');
 const GIT_OWNER = 'lianchuzhong';
 const GIT_REPO = 'LCZPatent';
 const GIT_BRANCH = 'main';
 const RAW = `https://raw.githubusercontent.com/${GIT_OWNER}/${GIT_REPO}/${GIT_BRANCH}/data`;
-
-// ===== DATA =====
 let feedItems = [];
-
 const defaultProducts = [
   {id:'demo1',title:'一种新型太阳能电池板',description:'本发明涉及一种高效太阳能电池板，通过多层纳米结构提高光电转换效率，适用于户用和工业光伏发电系统。',author:'匿名',promoted:true,imageUrl:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=500&fit=crop',timestamp:1710000000000},
   {id:'demo2',title:'智能水质监测系统',description:'一种基于物联网的实时水质监测装置，可同时检测pH值、浊度、余氯等多项指标，数据自动上传至云端。',author:'匿名',promoted:false,imageUrl:'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=500&fit=crop',timestamp:1710000001000},
@@ -264,48 +240,24 @@ const defaultProducts = [
   {id:'demo5',title:'新型可降解包装材料',description:'一种以植物纤维为基材的可降解包装材料，具有良好的强度和防水性，可在90天内自然降解。',author:'匿名',promoted:false,imageUrl:'https://images.pexels.com/photos/7464678/pexels-photo-7464678.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop',timestamp:1710000004000},
   {id:'demo6',title:'无线充电智能泊车系统',description:'集成无线充电技术的智能泊车系统，车辆停入车位后自动启动充电，支持多车型兼容。',author:'匿名',promoted:false,imageUrl:'https://images.pexels.com/photos/37029446/pexels-photo-37029446.jpeg?auto=compress&cs=tinysrgb&w=400&h=500&fit=crop',timestamp:1710000005000}
 ];
-
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2000)}
-
 function navigateTo(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(0);loadProducts()}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
-  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(1);loadLingerieCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(2);renderContactPage()}
+  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(1);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(2);loadToysCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(3);renderContactPage()}
 }
 function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
-
-// ===== FEED =====
 function searchProducts(query) {
   const container = document.getElementById('productList');
   if (!query.trim()) { renderProductList(); return }
   const filtered = feedItems.filter(i => i.title.includes(query) || (i.description||'').includes(query));
-  container.innerHTML = filtered.length
-    ? filtered.map(item => productCard(item)).join('')
-    : '<div style="text-align:center;padding:40px;color:var(--text2)">未找到相关实物</div>';
+  container.innerHTML = filtered.length ? filtered.map(item => productCard(item)).join('') : '<div style="text-align:center;padding:40px;color:var(--text2)">未找到相关实物</div>';
 }
-
 function productCard(item) {
-  return `
-    <div class="feed-card" style="margin-bottom:0;border-radius:16px" onclick="openDetail('${item.id}')">
-      <div style="display:flex;gap:12px;padding:12px">
-        <div style="width:80px;height:80px;border-radius:8px;background:var(--skeleton);flex-shrink:0;overflow:hidden;position:relative">
-          ${item.imageUrl?`<img src="${item.imageUrl}" alt="${item.title}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover">`:'📄'}
-        </div>
-        <div style="flex:1;min-width:0">
-          <h3 style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--text);margin-bottom:4px">${item.title}</h3>
-          <p style="font-size:12px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${item.description||''}</p>
-          <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
-            <div style="width:18px;height:18px;border-radius:50%;background:var(--skeleton);flex-shrink:0"></div>
-            <span style="font-size:11px;color:var(--text2)">${item.author||'连楚钟'}</span>
-          </div>
-        </div>
-      </div>
-    </div>`;
+  return '<div class="feed-card" style="margin-bottom:0;border-radius:16px" onclick="openDetail(\''+item.id+'\')"><div style="display:flex;gap:12px;padding:12px"><div style="width:80px;height:80px;border-radius:8px;background:var(--skeleton);flex-shrink:0;overflow:hidden;position:relative">'+(item.imageUrl?'<img src="'+item.imageUrl+'" alt="'+item.title+'" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover">':'📄')+'</div><div style="flex:1;min-width:0"><h3 style="font-family:Georgia,\'Times New Roman\',serif;font-size:15px;color:var(--text);margin-bottom:4px">'+item.title+'</h3><p style="font-size:12px;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+(item.description||'')+'</p><div style="display:flex;align-items:center;gap:8px;margin-top:8px"><div style="width:18px;height:18px;border-radius:50%;background:var(--skeleton);flex-shrink:0"></div><span style="font-size:11px;color:var(--text2)">'+(item.author||'连楚钟')+'</span></div></div></div></div>';
 }
-
-// ===== CONTACT =====
 const contactInfo = [
   {label:'微信',icon:'chat',value:'LCZ13202125281',action:'复制'},
   {label:'手机',icon:'phone',value:'18917266757',action:'复制'},
@@ -323,38 +275,23 @@ const contactIcons = {
   github:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
   facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>'
 };
-
 function renderContactPage(){
   const list = document.getElementById('contactList');
   if (!list) return;
-  list.innerHTML = contactInfo.map(c => {
+  list.innerHTML = contactInfo.map(function(c) {
     const iconHtml = contactIcons[c.icon] || '';
     let btnHtml;
-    if (c.href) {
-      btnHtml = `<a href="${c.href}" target="_blank" class="action-btn">前往</a>`;
-    } else {
-      btnHtml = `<button class="action-btn" onclick="copyContact('${c.value}')">复制</button>`;
-    }
-    return `
-      <div class="contact-card">
-        <div class="icon-wrap">${iconHtml}</div>
-        <div class="info">
-          <div class="label">${c.label}</div>
-          <div class="value">${c.value}</div>
-        </div>
-        ${btnHtml}
-      </div>`;
+    if (c.href) { btnHtml = '<a href="'+c.href+'" target="_blank" class="action-btn">前往</a>'; }
+    else { btnHtml = '<button class="action-btn" onclick="copyContact(\''+c.value+'\')">复制</button>'; }
+    return '<div class="contact-card"><div class="icon-wrap">'+iconHtml+'</div><div class="info"><div class="label">'+c.label+'</div><div class="value">'+c.value+'</div></div>'+btnHtml+'</div>';
   }).join('');
 }
-
 function copyContact(text){
   const ta = document.createElement('textarea');
   ta.value = text; document.body.appendChild(ta); ta.select();
   try { document.execCommand('copy'); showToast('已复制到剪贴板') } catch(e) { showToast('复制失败') }
   document.body.removeChild(ta);
 }
-
-// ===== LOAD FEED =====
 async function loadFeed(){
   try {
     const url = isGitHubPages ? RAW+'/feed.json' : '/api/feed';
@@ -364,28 +301,22 @@ async function loadFeed(){
   } catch(e) { feedItems = defaultProducts }
   renderProductList();
 }
-
 function renderProductList(){
   const container = document.getElementById('productList');
   if (!feedItems.length) { container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">暂无实物数据</div>'; return }
-  container.innerHTML = feedItems.map(item => productCard(item)).join('');
+  container.innerHTML = feedItems.map(function(item) { return productCard(item); }).join('');
 }
-
 function openDetail(id){
-  const item = feedItems.find(x => x.id === id);
+  const item = feedItems.find(function(x) { return x.id === id; });
   if (!item) return;
   document.getElementById('detailTitle').textContent = item.title;
   document.getElementById('detailAuthor').textContent = item.author || '连楚钟';
   document.getElementById('detailContent').textContent = item.description || '';
   const imgContainer = document.getElementById('detailImage');
-  if (item.imageUrl) {
-    imgContainer.innerHTML = `<img src="${item.imageUrl}" alt="${item.title}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover">`;
-  } else {
-    imgContainer.innerHTML = '<span>📷</span>';
-  }
+  if (item.imageUrl) { imgContainer.innerHTML = '<img src="'+item.imageUrl+'" alt="'+item.title+'" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover">'; }
+  else { imgContainer.innerHTML = '<span>📷</span>'; }
   navigateTo('detail');
 }
-
 async function loadProducts() {
   const container = document.getElementById('productList');
   container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">加载中...</div>';
@@ -393,400 +324,20 @@ async function loadProducts() {
     const url = isGitHubPages ? RAW+'/patents.json' : '/api/patents';
     const res = await fetch(url);
     const products = await res.json();
-    if (!products || products.length===0) {
-      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>';
-      return;
-    }
-    container.innerHTML = products.map(p => `
-      <div class="product-card">
-        <h3>${p.title}</h3>
-        <div class="meta">${p.applicant?'申请人: '+p.applicant:''}${p.patentNumber?' | 编号: '+p.patentNumber:''}${p.applicationDate?' | '+p.applicationDate:''}</div>
-        <div class="desc">${p.description}</div>
-        ${p.inventor?'<span class="tag">发明人: '+p.inventor+'</span>':''}
-        ${p.file?'<span class="tag">📎 有附件</span>':''}
-      </div>
-    `).join('');
-  } catch(e) {
-    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>';
-  }
+    if (!products || products.length===0) { container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>'; return; }
+    container.innerHTML = products.map(function(p) { return '<div class="product-card"><h3>'+p.title+'</h3><div class="meta">'+(p.applicant?'申请人: '+p.applicant:'')+(p.patentNumber?' | 编号: '+p.patentNumber:'')+(p.applicationDate?' | '+p.applicationDate:'')+'</div><div class="desc">'+p.description+'</div>'+(p.inventor?'<span class="tag">发明人: '+p.inventor+'</span>':'')+(p.file?'<span class="tag">📎 有附件</span>':'')+'</div>'; }).join('');
+  } catch(e) { container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>'; }
 }
-
-
-// ===== LINGERIE CATALOG =====
-const LINGERIE_IMG_BASE = isGitHubPages
-  ? 'https://cdn.jsdelivr.net/gh/' + GIT_OWNER + '/' + GIT_REPO + '@' + GIT_BRANCH + '/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4'
-  : '/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4';
-
-const imageNames = ['2 (96).jpg',
-'2 (1).jpg',
-'2 (2).jpg',
-'2 (3).jpg',
-'2 (4).jpg',
-'2 (5).jpg',
-'2 (6).jpg',
-'2 (7).jpg',
-'2 (10).jpg',
-'2 (11).jpg',
-'2 (14).jpg',
-'2 (16).jpg',
-'2 (17).jpg',
-'2 (18).jpg',
-'2 (19).jpg',
-'2 (23).jpg',
-'2 (25).jpg',
-'2 (27).jpg',
-'2 (28).jpg',
-'2 (29).jpg',
-'2 (30).jpg',
-'2 (31).jpg',
-'2 (33).jpg',
-'2 (35).jpg',
-'2 (36).jpg',
-'2 (39).jpg',
-'2 (40).jpg',
-'2 (41).jpg',
-'2 (42).jpg',
-'2 (43).jpg',
-'2 (44).jpg',
-'2 (45).jpg',
-'2 (46).jpg',
-'2 (47).jpg',
-'2 (48).jpg',
-'2 (49).jpg',
-'2 (50).jpg',
-'2 (51).jpg',
-'2 (52).jpg',
-'2 (54).jpg',
-'2 (55).jpg',
-'2 (56).jpg',
-'2 (57).jpg',
-'2 (58).jpg',
-'2 (59).jpg',
-'2 (60).jpg',
-'2 (61).jpg',
-'2 (62).jpg',
-'2 (64).jpg',
-'2 (65).jpg',
-'2 (67).jpg',
-'2 (68).jpg',
-'2 (69).jpg',
-'2 (70).jpg',
-'2 (71).jpg',
-'2 (72).jpg',
-'2 (73).jpg',
-'2 (74).jpg',
-'2 (75).jpg',
-'2 (76).jpg',
-'2 (77).jpg',
-'2 (79).jpg',
-'2 (80).jpg',
-'2 (81).jpg',
-'2 (82).jpg',
-'2 (83).jpg',
-'2 (84).jpg',
-'2 (85).jpg',
-'2 (86).jpg',
-'2 (88).jpg',
-'2 (90).jpg',
-'2 (92).jpg',
-'2 (93).jpg',
-'2 (95).jpg',
-'2 (133).jpg',
-'2 (134).jpg',
-'2 (135).jpg',
-'2 (140).jpg',
-'2 (142).jpg',
-'2 (144).jpg',
-'2 (145).jpg',
-'2 (148).jpg',
-'2 (149).jpg',
-'2 (150).jpg',
-'2 (152).jpg',
-'2 (154).jpg',
-'2 (155).jpg',
-'2 (156).jpg',
-'2 (157).jpg',
-'2 (158).jpg',
-'2 (159).jpg',
-'2 (160).jpg',
-'2 (161).jpg',
-'2 (162).jpg',
-'2 (163).jpg',
-'2 (164).jpg',
-'2 (167).jpg',
-'2 (170).jpg',
-'2 (171).jpg',
-'2 (172).jpg',
-'2 (173).jpg',
-'2 (175).jpg',
-'2 (176).jpg',
-'2 (177).jpg',
-'2 (178).jpg',
-'2 (179).jpg',
-'2 (181).jpg',
-'2 (182).jpg',
-'2 (185).jpg',
-'2 (12).png',
-'2 (26).jpg',
-'2 (37).jpg',
-'2 (91).jpg',
-'2 (99).jpg',
-'2 (100).jpg',
-'2 (103).jpg',
-'2 (104).jpg',
-'2 (106).jpg',
-'2 (107).jpg',
-'2 (108).jpg',
-'2 (110).jpg',
-'2 (111).jpg',
-'2 (112).jpg',
-'2 (116).jpg',
-'2 (117).jpg',
-'2 (118).jpg',
-'2 (120).jpg',
-'2 (122).jpg',
-'2 (124).jpg',
-'2 (126).jpg',
-'2 (127).jpg',
-'2 (128).jpg',
-'2 (130).jpg',
-'2 (131).jpg',
-'2 (380).jpg',
-'2 (315).jpg',
-'2 (316).jpg',
-'2 (318).jpg',
-'2 (319).jpg',
-'2 (320).jpg',
-'2 (321).jpg',
-'2 (322).jpg',
-'2 (324).jpg',
-'2 (325).jpg',
-'2 (326).jpg',
-'2 (327).jpg',
-'2 (328).jpg',
-'2 (329).jpg',
-'2 (331).jpg',
-'2 (333).jpg',
-'2 (334).jpg',
-'2 (337).jpg',
-'2 (338).jpg',
-'2 (340).jpg',
-'2 (341).jpg',
-'2 (342).jpg',
-'2 (343).jpg',
-'2 (344).jpg',
-'2 (346).jpg',
-'2 (348).jpg',
-'2 (350).jpg',
-'2 (353).jpg',
-'2 (354).jpg',
-'2 (355).jpg',
-'2 (358).jpg',
-'2 (359).jpg',
-'2 (361).jpg',
-'2 (362).jpg',
-'2 (363).jpg',
-'2 (365).jpg',
-'2 (366).jpg',
-'2 (369).jpg',
-'2 (370).jpg',
-'2 (371).jpg',
-'2 (372).jpg',
-'2 (373).jpg',
-'2 (374).jpg',
-'2 (376).jpg',
-'2 (377).jpg',
-'2 (378).jpg',
-'2 (379).jpg',
-'2 (242).jpg',
-'2 (243).jpg',
-'2 (245).jpg',
-'2 (105).jpg',
-'2 (113).jpg',
-'2 (119).jpg',
-'2 (146).jpg',
-'2 (184).jpg',
-'2 (187).jpg',
-'2 (188).jpg',
-'2 (189).jpg',
-'2 (190).jpg',
-'2 (191).jpg',
-'2 (193).jpg',
-'2 (195).jpg',
-'2 (196).jpg',
-'2 (197).jpg',
-'2 (198).jpg',
-'2 (199).jpg',
-'2 (201).jpg',
-'2 (202).jpg',
-'2 (205).jpg',
-'2 (206).jpg',
-'2 (207).jpg',
-'2 (208).jpg',
-'2 (209).jpg',
-'2 (210).jpg',
-'2 (211).jpg',
-'2 (212).jpg',
-'2 (213).jpg',
-'2 (216).jpg',
-'2 (218).jpg',
-'2 (219).jpg',
-'2 (220).jpg',
-'2 (221).jpg',
-'2 (222).jpg',
-'2 (223).jpg',
-'2 (224).jpg',
-'2 (225).jpg',
-'2 (226).jpg',
-'2 (227).jpg',
-'2 (228).jpg',
-'2 (229).jpg',
-'2 (230).jpg',
-'2 (231).jpg',
-'2 (235).jpg',
-'2 (236).jpg',
-'2 (237).jpg',
-'2 (238).jpg',
-'2 (239).jpg',
-'2 (240).jpg',
-'2 (241).jpg',
-'2 (392).jpg',
-'2 (246).jpg',
-'2 (249).jpg',
-'2 (250).jpg',
-'2 (251).jpg',
-'2 (252).jpg',
-'2 (253).jpg',
-'2 (254).jpg',
-'2 (255).jpg',
-'2 (256).jpg',
-'2 (257).jpg',
-'2 (259).jpg',
-'2 (260).jpg',
-'2 (263).jpg',
-'2 (264).jpg',
-'2 (268).jpg',
-'2 (269).jpg',
-'2 (270).jpg',
-'2 (271).jpg',
-'2 (272).jpg',
-'2 (273).jpg',
-'2 (274).jpg',
-'2 (275).jpg',
-'2 (277).jpg',
-'2 (278).jpg',
-'2 (280).jpg',
-'2 (281).jpg',
-'2 (282).jpg',
-'2 (283).jpg',
-'2 (284).jpg',
-'2 (285).jpg',
-'2 (287).jpg',
-'2 (288).jpg',
-'2 (289).jpg',
-'2 (290).jpg',
-'2 (292).jpg',
-'2 (293).jpg',
-'2 (295).jpg',
-'2 (297).jpg',
-'2 (298).jpg',
-'2 (299).jpg',
-'2 (300).jpg',
-'2 (303).jpg',
-'2 (306).jpg',
-'2 (307).jpg',
-'2 (309).jpg',
-'2 (311).jpg',
-'2 (312).jpg',
-'2 (314).jpg',
-'2 (317).jpg',
-'2 (345).jpg',
-'2 (381).jpg',
-'2 (382).jpg',
-'2 (383).jpg',
-'2 (385).jpg',
-'2 (386).jpg',
-'2 (387).jpg',
-'2 (388).jpg',
-'2 (390).jpg',
-'2 (391).jpg',
-'2 (421) - 副本.jpg',
-'2 (422) - 副本.jpg',
-'2 (393) - 副本.jpg',
-'2 (394) - 副本.jpg',
-'2 (395) - 副本.jpg',
-'2 (396) - 副本.jpg',
-'2 (398) - 副本.jpg',
-'2 (399) - 副本.jpg',
-'2 (400) - 副本.jpg',
-'2 (402) - 副本.jpg',
-'2 (404) - 副本.jpg',
-'2 (407) - 副本.jpg',
-'2 (408) - 副本.jpg',
-'2 (410) - 副本.jpg',
-'2 (413) - 副本.jpg',
-'2 (414) - 副本.jpg',
-'2 (415) - 副本.jpg',
-'2 (416) - 副本.jpg',
-'2 (417) - 副本.jpg',
-'2 (419) - 副本.jpg',
-'2 (420) - 副本.jpg',
-'2 (610).jpg',
-'2 (611).jpg',
-'2 (546).jpg',
-'2 (547).jpg',
-'2 (549).jpg',
-'2 (551).jpg',
-'2 (554).jpg',
-'2 (555).jpg',
-'2 (560).jpg',
-'2 (562).jpg',
-'2 (563).jpg',
-'2 (564).jpg',
-'2 (565).jpg',
-'2 (567).jpg',
-'2 (568).jpg',
-'2 (570).jpg',
-'2 (571).jpg',
-'2 (572).jpg',
-'2 (573).jpg',
-'2 (574).jpg',
-'2 (575).jpg',
-'2 (577).jpg',
-'2 (578).jpg',
-'2 (579).jpg',
-'2 (581).jpg',
-'2 (582).jpg',
-'2 (583).jpg',
-'2 (584).jpg',
-'2 (588).jpg',
-'2 (590).jpg',
-'2 (592).jpg',
-'2 (593).jpg',
-'2 (595).jpg',
-'2 (596).jpg',
-'2 (597).jpg',
-'2 (598).jpg',
-'2 (599).jpg',
-'2 (600).jpg',
-'2 (601).jpg',
-'2 (603).jpg',
-'2 (604).jpg',
-'2 (606).jpg',
-'2 (607).jpg',
-'2 (608).jpg'
-];
-
+const LINGERIE_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4' : '/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4';
+const imageNames = ['2 (96).jpg','2 (1).jpg','2 (2).jpg','2 (3).jpg','2 (4).jpg','2 (5).jpg','2 (6).jpg','2 (7).jpg','2 (10).jpg','2 (11).jpg','2 (14).jpg','2 (16).jpg','2 (17).jpg','2 (18).jpg','2 (19).jpg','2 (23).jpg','2 (25).jpg','2 (27).jpg','2 (28).jpg','2 (29).jpg','2 (30).jpg','2 (31).jpg','2 (33).jpg','2 (35).jpg','2 (36).jpg','2 (39).jpg','2 (40).jpg','2 (41).jpg','2 (42).jpg','2 (43).jpg','2 (44).jpg','2 (45).jpg','2 (46).jpg','2 (47).jpg','2 (48).jpg','2 (49).jpg','2 (50).jpg','2 (51).jpg','2 (52).jpg','2 (54).jpg','2 (55).jpg','2 (56).jpg','2 (57).jpg','2 (58).jpg','2 (59).jpg','2 (60).jpg','2 (61).jpg','2 (62).jpg','2 (64).jpg','2 (65).jpg','2 (67).jpg','2 (68).jpg','2 (69).jpg','2 (70).jpg','2 (71).jpg','2 (72).jpg','2 (73).jpg','2 (74).jpg','2 (75).jpg','2 (76).jpg','2 (77).jpg','2 (79).jpg','2 (80).jpg','2 (81).jpg','2 (82).jpg','2 (83).jpg','2 (84).jpg','2 (85).jpg','2 (86).jpg','2 (88).jpg','2 (90).jpg','2 (92).jpg','2 (93).jpg','2 (95).jpg','2 (133).jpg','2 (134).jpg','2 (135).jpg','2 (140).jpg','2 (142).jpg','2 (144).jpg','2 (145).jpg','2 (148).jpg','2 (149).jpg','2 (150).jpg','2 (152).jpg','2 (154).jpg','2 (155).jpg','2 (156).jpg','2 (157).jpg','2 (158).jpg','2 (159).jpg','2 (160).jpg','2 (161).jpg','2 (162).jpg','2 (163).jpg','2 (164).jpg','2 (167).jpg','2 (170).jpg','2 (171).jpg','2 (172).jpg','2 (173).jpg','2 (175).jpg','2 (176).jpg','2 (177).jpg','2 (178).jpg','2 (179).jpg','2 (181).jpg','2 (182).jpg','2 (185).jpg','2 (12).png','2 (26).jpg','2 (37).jpg','2 (91).jpg','2 (99).jpg','2 (100).jpg','2 (103).jpg','2 (104).jpg','2 (106).jpg','2 (107).jpg','2 (108).jpg','2 (110).jpg','2 (111).jpg','2 (112).jpg','2 (116).jpg','2 (117).jpg','2 (118).jpg','2 (120).jpg','2 (122).jpg','2 (124).jpg','2 (126).jpg','2 (127).jpg','2 (128).jpg','2 (130).jpg','2 (131).jpg','2 (380).jpg','2 (315).jpg','2 (316).jpg','2 (318).jpg','2 (319).jpg','2 (320).jpg','2 (321).jpg','2 (322).jpg','2 (324).jpg','2 (325).jpg','2 (326).jpg','2 (327).jpg','2 (328).jpg','2 (329).jpg','2 (331).jpg','2 (333).jpg','2 (334).jpg','2 (337).jpg','2 (338).jpg','2 (340).jpg','2 (341).jpg','2 (342).jpg','2 (343).jpg','2 (344).jpg','2 (346).jpg','2 (348).jpg','2 (350).jpg','2 (353).jpg','2 (354).jpg','2 (355).jpg','2 (358).jpg','2 (359).jpg','2 (361).jpg','2 (362).jpg','2 (363).jpg','2 (365).jpg','2 (366).jpg','2 (369).jpg','2 (370).jpg','2 (371).jpg','2 (372).jpg','2 (373).jpg','2 (374).jpg','2 (376).jpg','2 (377).jpg','2 (378).jpg','2 (379).jpg','2 (242).jpg','2 (243).jpg','2 (245).jpg','2 (105).jpg','2 (113).jpg','2 (119).jpg','2 (146).jpg','2 (184).jpg','2 (187).jpg','2 (188).jpg','2 (189).jpg','2 (190).jpg','2 (191).jpg','2 (193).jpg','2 (195).jpg','2 (196).jpg','2 (197).jpg','2 (198).jpg','2 (199).jpg','2 (201).jpg','2 (202).jpg','2 (205).jpg','2 (206).jpg','2 (207).jpg','2 (208).jpg','2 (209).jpg','2 (210).jpg','2 (211).jpg','2 (212).jpg','2 (213).jpg','2 (216).jpg','2 (218).jpg','2 (219).jpg','2 (220).jpg','2 (221).jpg','2 (222).jpg','2 (223).jpg','2 (224).jpg','2 (225).jpg','2 (226).jpg','2 (227).jpg','2 (228).jpg','2 (229).jpg','2 (230).jpg','2 (231).jpg','2 (235).jpg','2 (236).jpg','2 (237).jpg','2 (238).jpg','2 (239).jpg','2 (240).jpg','2 (241).jpg','2 (392).jpg','2 (246).jpg','2 (249).jpg','2 (250).jpg','2 (251).jpg','2 (252).jpg','2 (253).jpg','2 (254).jpg','2 (255).jpg','2 (256).jpg','2 (257).jpg','2 (259).jpg','2 (260).jpg','2 (263).jpg','2 (264).jpg','2 (268).jpg','2 (269).jpg','2 (270).jpg','2 (271).jpg','2 (272).jpg','2 (273).jpg','2 (274).jpg','2 (275).jpg','2 (277).jpg','2 (278).jpg','2 (280).jpg','2 (281).jpg','2 (282).jpg','2 (283).jpg','2 (284).jpg','2 (285).jpg','2 (287).jpg','2 (288).jpg','2 (289).jpg','2 (290).jpg','2 (292).jpg','2 (293).jpg','2 (295).jpg','2 (297).jpg','2 (298).jpg','2 (299).jpg','2 (300).jpg','2 (303).jpg','2 (306).jpg','2 (307).jpg','2 (309).jpg','2 (311).jpg','2 (312).jpg','2 (314).jpg','2 (317).jpg','2 (345).jpg','2 (381).jpg','2 (382).jpg','2 (383).jpg','2 (385).jpg','2 (386).jpg','2 (387).jpg','2 (388).jpg','2 (390).jpg','2 (391).jpg','2 (421) - 副本.jpg','2 (422) - 副本.jpg','2 (393) - 副本.jpg','2 (394) - 副本.jpg','2 (395) - 副本.jpg','2 (396) - 副本.jpg','2 (398) - 副本.jpg','2 (399) - 副本.jpg','2 (400) - 副本.jpg','2 (402) - 副本.jpg','2 (404) - 副本.jpg','2 (407) - 副本.jpg','2 (408) - 副本.jpg','2 (410) - 副本.jpg','2 (413) - 副本.jpg','2 (414) - 副本.jpg','2 (415) - 副本.jpg','2 (416) - 副本.jpg','2 (417) - 副本.jpg','2 (419) - 副本.jpg','2 (420) - 副本.jpg','2 (610).jpg','2 (611).jpg','2 (546).jpg','2 (547).jpg','2 (549).jpg','2 (551).jpg','2 (554).jpg','2 (555).jpg','2 (560).jpg','2 (562).jpg','2 (563).jpg','2 (564).jpg','2 (565).jpg','2 (567).jpg','2 (568).jpg','2 (570).jpg','2 (571).jpg','2 (572).jpg','2 (573).jpg','2 (574).jpg','2 (575).jpg','2 (577).jpg','2 (578).jpg','2 (579).jpg','2 (581).jpg','2 (582).jpg','2 (583).jpg','2 (584).jpg','2 (588).jpg','2 (590).jpg','2 (592).jpg','2 (593).jpg','2 (595).jpg','2 (596).jpg','2 (597).jpg','2 (598).jpg','2 (599).jpg','2 (600).jpg','2 (601).jpg','2 (603).jpg','2 (604).jpg','2 (606).jpg','2 (607).jpg','2 (608).jpg'];
 const LINGERIE_PAGE_SIZE = 20;
 let lingerieLoadedCount = 0;
-
 function loadLingerieCatalog() {
   lingerieLoadedCount = 0;
   document.getElementById('lingerieGrid').innerHTML = '';
-  document.getElementById('lingerieStats').textContent = '共 ' + imageNames.length + ' 张图片 · 每次加载20张';
+  document.getElementById('lingerieStats').textContent = '共 '+imageNames.length+' 张图片';
   loadMoreLingerie();
 }
-
 function loadMoreLingerie() {
   const grid = document.getElementById('lingerieGrid');
   const stats = document.getElementById('lingerieStats');
@@ -805,7 +356,7 @@ function loadMoreLingerie() {
     grid.appendChild(div);
   }
   lingerieLoadedCount = end;
-  stats.textContent = '已加载 ' + end + '/' + imageNames.length + ' 张图片';
+  stats.textContent = '已加载 '+end+'/'+imageNames.length+' 张图片';
   const oldBtn = document.getElementById('loadMoreBtn');
   if (oldBtn) oldBtn.remove();
   if (end < imageNames.length) {
@@ -813,17 +364,58 @@ function loadMoreLingerie() {
     wrap.id = 'loadMoreBtn';
     wrap.style.cssText = 'text-align:center;padding:20px';
     const btn = document.createElement('button');
-    btn.textContent = '加载更多 (剩余 ' + (imageNames.length - end) + ' 张)';
+    btn.textContent = '加载更多 (剩余 '+(imageNames.length - end)+' 张)';
     btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
     btn.onclick = loadMoreLingerie;
     wrap.appendChild(btn);
     grid.parentElement.appendChild(wrap);
   }
-}// Init
+}
+const TOYS_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E5%84%BF%E7%AB%A5%E7%8E%A9%E5%85%B7' : '/data/images/%E5%84%BF%E7%AB%A5%E7%8E%A9%E5%85%B7';
+const toysImageNames = ['2 (12).jpg','2 (13).jpg','2 (15).jpg','2 (38).jpg','2 (78).jpg','2 (94).jpg','2 (97).jpg','2 (101).jpg','2 (109).jpg','2 (136).jpg','2 (139).jpg','2 (143).jpg','2 (151).jpg','2 (166).jpg','2 (180).jpg','2 (204).jpg','2 (217).jpg','2 (232).jpg','2 (244).jpg','2 (248).jpg','2 (261).jpg','2 (301).jpg','2 (304).jpg','2 (305).jpg','2 (308).jpg','2 (310).jpg','2 (313).jpg','2 (332).jpg','2 (336).jpg','2 (347).jpg','2 (349).jpg','2 (367).jpg','2 (401).jpg','2 (451).jpg','2 (455).jpg','2 (458).jpg','2 (461).jpg','2 (482).jpg','2 (497).jpg','2 (505).jpg','2 (529).jpg','2 (537).jpg','2 (544).jpg','2 (550).jpg','2 (552).jpg','2 (556).jpg','2 (559).jpg','2 (561).jpg','2 (580).jpg','2 (585).jpg','2 (643).jpg','2 (666).jpg','2 (693).jpg','2 (706).jpg','2 (716).jpg','2 (717).jpg','2 (734).jpg','2 (737).jpg','2 (752).jpg','2 (763).jpg','2 (788).jpg','2 (789).jpg','2 (891).jpg','2 (899).jpg','2 (9).jpg','2 (920).jpg','2 (921).jpg','2 (934).jpg','2 (938).jpg','2 (951).jpg','2 (983).jpg','2 (986).jpg','2 (999).jpg'];
+const TOYS_PAGE_SIZE = 20;
+let toysLoadedCount = 0;
+function loadToysCatalog() {
+  toysLoadedCount = 0;
+  document.getElementById('toysGrid').innerHTML = '';
+  document.getElementById('toysStats').textContent = '共 '+toysImageNames.length+' 张图片';
+  loadMoreToys();
+}
+function loadMoreToys() {
+  const grid = document.getElementById('toysGrid');
+  const stats = document.getElementById('toysStats');
+  const start = toysLoadedCount;
+  const end = Math.min(start + TOYS_PAGE_SIZE, toysImageNames.length);
+  for (let i = start; i < end; i++) {
+    const name = toysImageNames[i];
+    const div = document.createElement('div');
+    div.className = 'lingerie-item';
+    const img = document.createElement('img');
+    img.src = TOYS_IMG_BASE + '/' + encodeURIComponent(name);
+    img.alt = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
+    img.loading = 'lazy';
+    img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    div.appendChild(img);
+    grid.appendChild(div);
+  }
+  toysLoadedCount = end;
+  stats.textContent = '已加载 '+end+'/'+toysImageNames.length+' 张图片';
+  const oldBtn = document.getElementById('loadMoreToysBtn');
+  if (oldBtn) oldBtn.remove();
+  if (end < toysImageNames.length) {
+    const wrap = document.createElement('div');
+    wrap.id = 'loadMoreToysBtn';
+    wrap.style.cssText = 'text-align:center;padding:20px';
+    const btn = document.createElement('button');
+    btn.textContent = '加载更多 (剩余 '+(toysImageNames.length - end)+' 张)';
+    btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
+    btn.onclick = loadMoreToys;
+    wrap.appendChild(btn);
+    grid.parentElement.appendChild(wrap);
+  }
+}
 loadFeed();
 renderContactPage();
 </script>
 </body>
 </html>
-
-
