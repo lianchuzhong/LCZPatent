@@ -104,7 +104,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <body>
 <div id="app">
   <div id="toast" class="toast"></div>
-  <div id="page-product" class="page active">
+  <div id="page-product" class="page">
     <div class="header">
       <h1>世界实物</h1>
       <div class="header-actions"></div>
@@ -206,7 +206,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div id="toysGrid" class="lingerie-grid"></div>
     </div>
   </div>
-    <div id="page-agirv" class="page">
+    <div id="page-agirv" class="page active">
     <div class="header">
       <h1>移动AGI房车</h1>
       <div class="header-actions"></div>
@@ -221,7 +221,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
   </div>
   <div class="bottom-nav">
-    <div class="nav-item active" onclick="navigateTo('product')">
+    <div class="nav-item active" onclick="navigateTo('agirv')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17l4-8 4 4 4-6 2 4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      <span>AGI房车</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('product')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
       <span>实物</span>
     </div>
@@ -232,10 +236,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="nav-item" onclick="navigateTo('toys')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
       <span>儿童玩具</span>
-    </div>
-    <div class="nav-item" onclick="navigateTo('agirv')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17l4-8 4 4 4-6 2 4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-      <span>AGI房车</span>
     </div>
     <div class="nav-item" onclick="navigateTo('contact')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -262,9 +262,9 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 function navigateTo(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(0);loadProducts()}
+  if(page==='agirv'){document.getElementById('page-agirv').classList.add('active');navActive(0);loadAGIRVCatalog()} else if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(1);loadProducts()}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
-  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(1);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(2);loadToysCatalog()} else if(page==='agirv'){document.getElementById('page-agirv').classList.add('active');navActive(3);loadAGIRVCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(4);renderContactPage()}
+  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(2);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(3);loadToysCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(4);renderContactPage()}
 }
 function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
 function searchProducts(query) {
