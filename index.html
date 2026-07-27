@@ -206,6 +206,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div id="toysGrid" class="lingerie-grid"></div>
     </div>
   </div>
+    <div id="page-agirv" class="page">
+    <div class="header">
+      <h1>移动AGI房车</h1>
+      <div class="header-actions"></div>
+    </div>
+    <div class="lingerie-page">
+      <div class="lingerie-hero">
+        <h1>移动AGI房车 · 实物展示</h1>
+        <p>移动AGI房车分类实物图片展示 Mobile AGI RV Collection</p>
+      </div>
+      <div id="agirvStats" class="lingerie-stats">加载中...</div>
+      <div id="agirvGrid" class="lingerie-grid"></div>
+    </div>
+  </div>
   <div class="bottom-nav">
     <div class="nav-item active" onclick="navigateTo('product')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
@@ -218,6 +232,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="nav-item" onclick="navigateTo('toys')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
       <span>儿童玩具</span>
+    </div>
+    <div class="nav-item" onclick="navigateTo('agirv')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17l4-8 4 4 4-6 2 4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      <span>AGI房车</span>
     </div>
     <div class="nav-item" onclick="navigateTo('contact')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -246,7 +264,7 @@ function navigateTo(page){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(0);loadProducts()}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
-  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(1);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(2);loadToysCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(3);renderContactPage()}
+  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(1);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(2);loadToysCatalog()} else if(page==='agirv'){document.getElementById('page-agirv').classList.add('active');navActive(3);loadAGIRVCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(4);renderContactPage()}
 }
 function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
 function searchProducts(query) {
@@ -426,6 +444,59 @@ function loadMoreToys() {
     btn.textContent = '加载更多 (剩余 '+(toysImageNames.length - end)+' 张)';
     btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
     btn.onclick = loadMoreToys;
+    wrap.appendChild(btn);
+    grid.parentElement.appendChild(wrap);
+  }
+}
+
+const AGIRV_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E7%A7%BB%E5%8A%A8agi%E6%88%BF%E8%BD%A6' : '/data/images/%E7%A7%BB%E5%8A%A8agi%E6%88%BF%E8%BD%A6';
+let agirvImageNames = [];
+const AGIRV_PAGE_SIZE = 20;
+let agirvLoadedCount = 0;
+async function loadAGIRVCatalog() {
+  agirvLoadedCount = 0;
+  document.getElementById('agirvGrid').innerHTML = '';
+  document.getElementById('agirvStats').textContent = '加载中...';
+  try {
+    const apiUrl = 'https://api.github.com/repos/'+GIT_OWNER+'/'+GIT_REPO+'/contents/data/images/%E7%A7%BB%E5%8A%A8agi%E6%88%BF%E8%BD%A6';
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+    agirvImageNames = data.filter(f => f.type === 'file').map(f => f.name).filter(n => !n.includes('?'));
+    document.getElementById('agirvStats').textContent = '共 '+agirvImageNames.length+' 张图片';
+    loadMoreAGIRV();
+  } catch(e) {
+    document.getElementById('agirvStats').textContent = '加载失败';
+  }
+}
+function loadMoreAGIRV() {
+  const grid = document.getElementById('agirvGrid');
+  const stats = document.getElementById('agirvStats');
+  const start = agirvLoadedCount;
+  const end = Math.min(start + AGIRV_PAGE_SIZE, agirvImageNames.length);
+  for (let i = start; i < end; i++) {
+    const name = agirvImageNames[i];
+    const div = document.createElement('div');
+    div.className = 'lingerie-item';
+    const img = document.createElement('img');
+    img.src = AGIRV_IMG_BASE + '/' + encodeURIComponent(name);
+    img.alt = name.replace(/\.[^.]+$/, '').replace(/[()]/g, '');
+    img.loading = 'lazy';
+    img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    div.appendChild(img);
+    grid.appendChild(div);
+  }
+  agirvLoadedCount = end;
+  stats.textContent = '已加载 '+end+'/'+agirvImageNames.length+' 张图片';
+  const oldBtn = document.getElementById('loadMoreAGIRVBtn');
+  if (oldBtn) oldBtn.remove();
+  if (end < agirvImageNames.length) {
+    const wrap = document.createElement('div');
+    wrap.id = 'loadMoreAGIRVBtn';
+    wrap.style.cssText = 'text-align:center;padding:20px';
+    const btn = document.createElement('button');
+    btn.textContent = '加载更多 (剩余 '+(agirvImageNames.length - end)+' 张)';
+    btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
+    btn.onclick = loadMoreAGIRV;
     wrap.appendChild(btn);
     grid.parentElement.appendChild(wrap);
   }
