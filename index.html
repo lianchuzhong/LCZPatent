@@ -450,23 +450,14 @@ function loadMoreToys() {
 }
 
 const AGIRV_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E7%A7%BB%E5%8A%A8agi%E6%88%BF%E8%BD%A6' : '/data/images/%E7%A7%BB%E5%8A%A8agi%E6%88%BF%E8%BD%A6';
-let agirvImageNames = [];
+const agirvImageNames = ['1688_image_share_0ef506c62e0f8e68a59694fc2ef7a292.jpg','1688_image_share_7c48e49f16e581e9da167d77d77d2f31.jpg','1688_image_share_efc5aeca6227673e739e82466e0bf847.jpg'];
 const AGIRV_PAGE_SIZE = 20;
 let agirvLoadedCount = 0;
-async function loadAGIRVCatalog() {
+function loadAGIRVCatalog() {
   agirvLoadedCount = 0;
   document.getElementById('agirvGrid').innerHTML = '';
-  document.getElementById('agirvStats').textContent = '加载中...';
-  try {
-    const apiUrl = 'https://api.github.com/repos/'+GIT_OWNER+'/'+GIT_REPO+'/contents/data/images/%E7%A7%BB%E5%8A%A8agi%E6%88%BF%E8%BD%A6';
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    agirvImageNames = data.filter(f => f.type === 'file').map(f => f.name).filter(n => !n.includes('?'));
-    document.getElementById('agirvStats').textContent = '共 '+agirvImageNames.length+' 张图片';
-    loadMoreAGIRV();
-  } catch(e) {
-    document.getElementById('agirvStats').textContent = '加载失败';
-  }
+  document.getElementById('agirvStats').textContent = '共 '+agirvImageNames.length+' 张图片';
+  loadMoreAGIRV();
 }
 function loadMoreAGIRV() {
   const grid = document.getElementById('agirvGrid');
