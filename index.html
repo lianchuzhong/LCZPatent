@@ -356,6 +356,40 @@ function loadLingerieCatalog() {
   document.getElementById('lingerieStats').textContent = '共 '+imageNames.length+' 张图片';
   loadMoreLingerie();
 }
+function loadMoreLingerie() {
+  const grid = document.getElementById('lingerieGrid');
+  const stats = document.getElementById('lingerieStats');
+  const start = lingerieLoadedCount;
+  const end = Math.min(start + LINGERIE_PAGE_SIZE, imageNames.length);
+  for (let i = start; i < end; i++) {
+    const name = imageNames[i];
+    const div = document.createElement('div');
+    div.className = 'lingerie-item';
+    const img = document.createElement('img');
+    img.src = LINGERIE_IMG_BASE + '/' + encodeURIComponent(name);
+    img.alt = name.replace(/.[^.]+$/, '').replace(/^2s*/, '').replace(/[()]/g, '');
+    img.loading = 'lazy';
+    img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    div.appendChild(img);
+    grid.appendChild(div);
+  }
+  lingerieLoadedCount = end;
+  stats.textContent = '已加载 '+end+'/'+imageNames.length+' 张图片';
+  const oldBtn = document.getElementById('loadMoreBtn');
+  if (oldBtn) oldBtn.remove();
+  if (end < imageNames.length) {
+    const wrap = document.createElement('div');
+    wrap.id = 'loadMoreBtn';
+    wrap.style.cssText = 'text-align:center;padding:20px';
+    const btn = document.createElement('button');
+    btn.textContent = '加载更多 (剩余 '+(imageNames.length - end)+' 张)';
+    btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
+    btn.onclick = loadMoreLingerie;
+    wrap.appendChild(btn);
+    grid.parentElement.appendChild(wrap);
+  }
+}
+
 const TOYS_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E5%84%BF%E7%AB%A5%E7%8E%A9%E5%85%B7' : '/data/images/%E5%84%BF%E7%AB%A5%E7%8E%A9%E5%85%B7';
 const toysImageNames = ['2 (12).jpg','2 (13).jpg','2 (15).jpg','2 (38).jpg','2 (78).jpg','2 (94).jpg','2 (97).jpg','2 (101).jpg','2 (109).jpg','2 (136).jpg','2 (139).jpg','2 (143).jpg','2 (151).jpg','2 (166).jpg','2 (180).jpg','2 (204).jpg','2 (217).jpg','2 (232).jpg','2 (244).jpg','2 (248).jpg','2 (261).jpg','2 (301).jpg','2 (304).jpg','2 (305).jpg','2 (308).jpg','2 (310).jpg','2 (313).jpg','2 (332).jpg','2 (336).jpg','2 (347).jpg','2 (349).jpg','2 (367).jpg','2 (401).jpg','2 (451).jpg','2 (455).jpg','2 (458).jpg','2 (461).jpg','2 (482).jpg','2 (497).jpg','2 (505).jpg','2 (529).jpg','2 (537).jpg','2 (544).jpg','2 (550).jpg','2 (552).jpg','2 (556).jpg','2 (559).jpg','2 (561).jpg','2 (580).jpg','2 (585).jpg','2 (643).jpg','2 (666).jpg','2 (693).jpg','2 (706).jpg','2 (716).jpg','2 (717).jpg','2 (734).jpg','2 (737).jpg','2 (752).jpg','2 (763).jpg','2 (788).jpg','2 (789).jpg','2 (891).jpg','2 (899).jpg','2 (9).jpg','2 (920).jpg','2 (921).jpg','2 (934).jpg','2 (938).jpg','2 (951).jpg','2 (983).jpg','2 (986).jpg','2 (999).jpg'];
 const TOYS_PAGE_SIZE = 20;
