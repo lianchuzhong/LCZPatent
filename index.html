@@ -225,6 +225,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17l4-8 4 4 4-6 2 4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
       <span>AGI房车</span>
     </div>
+    <div class="nav-item" onclick="navigateTo('shoes')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>女士婚鞋</span>
+    </div>
     <div class="nav-item" onclick="navigateTo('product')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
       <span>实物</span>
@@ -262,9 +266,9 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 function navigateTo(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  if(page==='agirv'){document.getElementById('page-agirv').classList.add('active');navActive(0);loadAGIRVCatalog()} else if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(1);loadProducts()}
+  if(page==='agirv'){document.getElementById('page-agirv').classList.add('active');navActive(0);loadAGIRVCatalog()} else if(page==='shoes'){document.getElementById('page-shoes').classList.add('active');navActive(1);loadShoesCatalog()} else if(page==='product'){document.getElementById('page-product').classList.add('active');navActive(2);loadProducts()}
   else if(page==='detail'){document.getElementById('page-detail').classList.add('active')}
-  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(2);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(3);loadToysCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(4);renderContactPage()}
+  else if(page==='lingerie'){document.getElementById('page-lingerie').classList.add('active');navActive(3);loadLingerieCatalog()} else if(page==='toys'){document.getElementById('page-toys').classList.add('active');navActive(4);loadToysCatalog()} else if(page==='contact'){document.getElementById('page-contact').classList.add('active');navActive(5);renderContactPage()}
 }
 function navActive(i){const n=document.querySelectorAll('.nav-item');if(n[i])n[i].classList.add('active')}
 function searchProducts(query) {
@@ -288,7 +292,17 @@ const contactInfo = [
 ];
 const contactIcons = {
   chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
-  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12
+  <div id="page-shoes" class="page">
+    <div class="content">
+      <div class="page-header">
+        <div class="page-title">女士婚鞋</div>
+        <div id="shoesStats" class="page-stats">共 0 张图片</div>
+      </div>
+      <div id="shoesGrid" class="grid"></div>
+    </div>
+  </div>
+c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
   phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>',
   github:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
   facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>'
@@ -496,6 +510,57 @@ function loadMoreAGIRV() {
     grid.parentElement.appendChild(wrap);
   }
 }
+
+const SHOES_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E5%A5%B3%E5%A3%AB%E5%A9%9A%E9%9E%8B' : '/data/images/%E5%A5%B3%E5%A3%AB%E5%A9%9A%E9%9E%8B';
+const shoesImageNames = ["2 (1123).jpg","2 (1117).jpg","2 (1118).jpg","2 (1119).jpg","2 (1120).jpg","2 (1121).jpg","2 (1122).jpg","1688_image_share_d0d3f5fbbb02aa79a99571b89e64932f.jpg","2 (1279).jpg","2 (24).jpg","2 (63).jpg","2 (89).jpg","2 (125).jpg","2 (147).jpg","2 (174).jpg","2 (194).jpg","2 (286).jpg","2 (294).jpg","2 (357).jpg","2 (411).jpg","2 (480).jpg","2 (591).jpg","2 (675).jpg","2 (780).jpg"];
+const SHOES_PAGE_SIZE = 20;
+let shoesLoadedCount = 0;
+function loadShoesCatalog() {
+  shoesLoadedCount = 0;
+  document.getElementById('shoesGrid').innerHTML = '';
+  document.getElementById('shoesStats').textContent = '共 '+shoesImageNames.length+' 张图片';
+  loadMoreShoes();
+}
+function loadMoreShoes() {
+  const grid = document.getElementById('shoesGrid');
+  const stats = document.getElementById('shoesStats');
+  const start = shoesLoadedCount;
+  const end = Math.min(start + SHOES_PAGE_SIZE, shoesImageNames.length);
+  for (let i = start; i < end; i++) {
+    const name = shoesImageNames[i];
+    const div = document.createElement('div');
+    div.className = 'lingerie-item';
+    const a = document.createElement('a');
+    a.href = imgProxy(SHOES_IMG_BASE + '/' + encodeURIComponent(name));
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.style.display = 'block';
+    const img = document.createElement('img');
+    img.src = imgProxy(SHOES_IMG_BASE + '/' + encodeURIComponent(name));
+    img.alt = name.replace(/[.][^.]+$/, '').replace(/^2s*/, '').replace(/[()]/g, '');
+    img.loading = 'lazy';
+    img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    a.appendChild(img);
+    div.appendChild(a);
+    grid.appendChild(div);
+  }
+  shoesLoadedCount = end;
+  stats.textContent = '已加载 '+end+'/'+shoesImageNames.length+' 张图片';
+  const oldBtn = document.getElementById('loadMoreShoesBtn');
+  if (oldBtn) oldBtn.remove();
+  if (end < shoesImageNames.length) {
+    const wrap = document.createElement('div');
+    wrap.id = 'loadMoreShoesBtn';
+    wrap.style.cssText = 'text-align:center;padding:20px';
+    const btn = document.createElement('button');
+    btn.textContent = '加载更多 (剩余 '+(shoesImageNames.length - end)+' 张)';
+    btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
+    btn.onclick = loadMoreShoes;
+    wrap.appendChild(btn);
+    grid.parentElement.appendChild(wrap);
+  }
+}
+
 loadFeed();
 renderContactPage();
 </script>
