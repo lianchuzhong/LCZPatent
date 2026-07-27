@@ -347,63 +347,14 @@ async function loadProducts() {
   } catch(e) { container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无实物数据</div>'; }
 }
 const LINGERIE_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4' : '/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4';
-let imageNames = [];
+const imageNames = ['2 (169).jpg','2 (234).jpg','2 (276).jpg','2 (291).jpg','2 (364).jpg','2 (394).jpg','2 (395).jpg','2 (398).jpg','2 (399).jpg','2 (400).jpg','2 (402).jpg','2 (404).jpg','2 (407).jpg','2 (408).jpg','2 (410).jpg','2 (413).jpg','2 (414).jpg','2 (415).jpg','2 (416).jpg','2 (417).jpg','2 (420).jpg','2 (421).jpg','2 (422).jpg','2 (424).jpg','2 (426).jpg','2 (427).jpg','2 (433).jpg','2 (434).jpg','2 (435).jpg','2 (437).jpg','2 (438).jpg','2 (439).jpg','2 (440).jpg','2 (441).jpg','2 (443).jpg','2 (444).jpg','2 (445).jpg','2 (446).jpg','2 (447).jpg','2 (449).jpg','2 (452).jpg','2 (453).jpg','2 (454).jpg','2 (456).jpg','2 (457).jpg','2 (459).jpg','2 (463).jpg','2 (464).jpg','2 (465).jpg','2 (466).jpg','2 (468).jpg','2 (469).jpg','2 (470).jpg','2 (471).jpg','2 (472).jpg','2 (473).jpg','2 (475).jpg','2 (476).jpg','2 (477).jpg','2 (478).jpg','2 (479).jpg','2 (481).jpg','2 (483).jpg','2 (484).jpg','2 (485).jpg','2 (486).jpg','2 (487).jpg','2 (488).jpg','2 (489).jpg','2 (490).jpg','2 (491).jpg','2 (493).jpg','2 (494).jpg','2 (495).jpg','2 (496).jpg','2 (499).jpg','2 (500).jpg','2 (501).jpg','2 (502).jpg','2 (503).jpg','2 (504).jpg','2 (507).jpg','2 (508).jpg','2 (509).jpg','2 (510).jpg','2 (511).jpg','2 (512).jpg','2 (513).jpg','2 (514).jpg','2 (515).jpg','2 (521).jpg','2 (522).jpg','2 (524).jpg','2 (525).jpg','2 (527).jpg','2 (531).jpg','2 (532).jpg','2 (533).jpg','2 (536).jpg','2 (538).jpg','2 (540).jpg','2 (541).jpg','2 (542).jpg','2 (543).jpg','2 (545).jpg','2 (546).jpg','2 (547).jpg','2 (549).jpg','2 (551).jpg','2 (555).jpg','2 (563).jpg','2 (567).jpg','2 (575).jpg','2 (577).jpg','2 (579).jpg','2 (581).jpg','2 (582).jpg','2 (583).jpg','2 (584).jpg','2 (588).jpg','2 (592).jpg','2 (593).jpg','2 (596).jpg','2 (599).jpg','2 (600).jpg','2 (601).jpg','2 (604).jpg','2 (607).jpg','2 (611).jpg','2 (612).jpg','2 (613).jpg','2 (614).jpg','2 (616).jpg','2 (618).jpg','2 (620).jpg','2 (624).jpg','2 (627).jpg','2 (628).jpg','2 (629).jpg','2 (630).jpg','2 (631).jpg','2 (632).jpg','2 (633).jpg','2 (634).jpg','2 (635).jpg','2 (636).jpg','2 (637).jpg','2 (638).jpg','2 (639).jpg','2 (640).jpg','2 (641).jpg','2 (642).jpg','2 (739).jpg','2 (740).jpg','2 (741).jpg','2 (742).jpg','2 (743).jpg','2 (744).jpg','2 (746).jpg','2 (748).jpg','2 (749).jpg','2 (751).jpg','2 (754).jpg','2 (755).jpg','2 (758).jpg','2 (759).jpg','2 (761).jpg','2 (762).jpg','2 (764).jpg','2 (766).jpg','2 (767).jpg','2 (768).jpg','2 (770).jpg','2 (771).jpg','2 (773).jpg','2 (774).jpg','2 (777).jpg','2 (782).jpg','2 (784).jpg','2 (785).jpg','2 (786).jpg','2 (787).jpg','2 (790).jpg','2 (791).jpg','2 (792).jpg','2 (793).jpg','2 (794).jpg','2 (795).jpg','2 (796).jpg','2 (798).jpg','2 (800).jpg','2 (802).jpg','2 (87).jpg'];
 const LINGERIE_PAGE_SIZE = 20;
-let lingerieLoadedCount = 0;
-async function loadLingerieCatalog() {
-  lingerieLoadedCount = 0;
-  document.getElementById('lingerieGrid').innerHTML = '';
-  document.getElementById('lingerieStats').textContent = '加载中...';
-  try {
-    const apiUrl = 'https://api.github.com/repos/'+GIT_OWNER+'/'+GIT_REPO+'/contents/data/images/%E5%A5%B3%E5%A3%AB%E5%86%85%E8%A1%A3%E8%A3%A4';
-    const res = await fetch(apiUrl);
-    const data = await res.json();
-    imageNames = data.filter(f => f.type === 'file').map(f => f.name).filter(n => !n.includes('?'));
-    document.getElementById('lingerieStats').textContent = '共 '+imageNames.length+' 张图片';
-    loadMoreLingerie();
-  } catch(e) {
-    document.getElementById('lingerieStats').textContent = '加载失败';
-  }
-}const LINGERIE_PAGE_SIZE = 20;
 let lingerieLoadedCount = 0;
 function loadLingerieCatalog() {
   lingerieLoadedCount = 0;
   document.getElementById('lingerieGrid').innerHTML = '';
   document.getElementById('lingerieStats').textContent = '共 '+imageNames.length+' 张图片';
   loadMoreLingerie();
-}
-function loadMoreLingerie() {
-  const grid = document.getElementById('lingerieGrid');
-  const stats = document.getElementById('lingerieStats');
-  const start = lingerieLoadedCount;
-  const end = Math.min(start + LINGERIE_PAGE_SIZE, imageNames.length);
-  for (let i = start; i < end; i++) {
-    const name = imageNames[i];
-    const div = document.createElement('div');
-    div.className = 'lingerie-item';
-    const img = document.createElement('img');
-    img.src = LINGERIE_IMG_BASE + '/' + encodeURIComponent(name);
-    img.alt = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
-    img.loading = 'lazy';
-    img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
-    div.appendChild(img);
-    grid.appendChild(div);
-  }
-  lingerieLoadedCount = end;
-  stats.textContent = '已加载 '+end+'/'+imageNames.length+' 张图片';
-  const oldBtn = document.getElementById('loadMoreBtn');
-  if (oldBtn) oldBtn.remove();
-  if (end < imageNames.length) {
-    const wrap = document.createElement('div');
-    wrap.id = 'loadMoreBtn';
-    wrap.style.cssText = 'text-align:center;padding:20px';
-    const btn = document.createElement('button');
-    btn.textContent = '加载更多 (剩余 '+(imageNames.length - end)+' 张)';
-    btn.style.cssText = 'padding:12px 40px;border:none;border-radius:24px;background:var(--gold);color:white;font-size:15px;cursor:pointer;font-family:Georgia,\'Times New Roman\',serif';
-    btn.onclick = loadMoreLingerie;
-    wrap.appendChild(btn);
-    grid.parentElement.appendChild(wrap);
-  }
 }
 const TOYS_IMG_BASE = isGitHubPages ? 'https://cdn.jsdelivr.net/gh/'+GIT_OWNER+'/'+GIT_REPO+'@'+GIT_BRANCH+'/data/images/%E5%84%BF%E7%AB%A5%E7%8E%A9%E5%85%B7' : '/data/images/%E5%84%BF%E7%AB%A5%E7%8E%A9%E5%85%B7';
 const toysImageNames = ['2 (12).jpg','2 (13).jpg','2 (15).jpg','2 (38).jpg','2 (78).jpg','2 (94).jpg','2 (97).jpg','2 (101).jpg','2 (109).jpg','2 (136).jpg','2 (139).jpg','2 (143).jpg','2 (151).jpg','2 (166).jpg','2 (180).jpg','2 (204).jpg','2 (217).jpg','2 (232).jpg','2 (244).jpg','2 (248).jpg','2 (261).jpg','2 (301).jpg','2 (304).jpg','2 (305).jpg','2 (308).jpg','2 (310).jpg','2 (313).jpg','2 (332).jpg','2 (336).jpg','2 (347).jpg','2 (349).jpg','2 (367).jpg','2 (401).jpg','2 (451).jpg','2 (455).jpg','2 (458).jpg','2 (461).jpg','2 (482).jpg','2 (497).jpg','2 (505).jpg','2 (529).jpg','2 (537).jpg','2 (544).jpg','2 (550).jpg','2 (552).jpg','2 (556).jpg','2 (559).jpg','2 (561).jpg','2 (580).jpg','2 (585).jpg','2 (643).jpg','2 (666).jpg','2 (693).jpg','2 (706).jpg','2 (716).jpg','2 (717).jpg','2 (734).jpg','2 (737).jpg','2 (752).jpg','2 (763).jpg','2 (788).jpg','2 (789).jpg','2 (891).jpg','2 (899).jpg','2 (9).jpg','2 (920).jpg','2 (921).jpg','2 (934).jpg','2 (938).jpg','2 (951).jpg','2 (983).jpg','2 (986).jpg','2 (999).jpg'];
