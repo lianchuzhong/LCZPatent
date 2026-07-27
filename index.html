@@ -415,12 +415,18 @@ function loadMoreToys() {
     const name = toysImageNames[i];
     const div = document.createElement('div');
     div.className = 'lingerie-item';
+        const a = document.createElement('a');
+    a.href = TOYS_IMG_BASE + '/' + encodeURIComponent(name);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.style.display = 'block';
     const img = document.createElement('img');
     img.src = TOYS_IMG_BASE + '/' + encodeURIComponent(name);
-    img.alt = name.replace(/\.[^.]+$/, '').replace(/^2\s*/, '').replace(/[()]/g, '');
+    img.alt = name.replace(/.[^.]+$/, '').replace(/^2s*/, '').replace(/[()]/g, '');
     img.loading = 'lazy';
     img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
-    div.appendChild(img);
+    a.appendChild(img);
+    div.appendChild(a);
     grid.appendChild(div);
   }
   toysLoadedCount = end;
@@ -459,12 +465,18 @@ function loadMoreAGIRV() {
     const name = agirvImageNames[i];
     const div = document.createElement('div');
     div.className = 'lingerie-item';
+        const a = document.createElement('a');
+    a.href = AGIRV_IMG_BASE + '/' + encodeURIComponent(name);
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.style.display = 'block';
     const img = document.createElement('img');
     img.src = AGIRV_IMG_BASE + '/' + encodeURIComponent(name);
-    img.alt = name.replace(/\.[^.]+$/, '').replace(/[()]/g, '');
+    img.alt = name.replace(/.[^.]+$/, '').replace(/[()]/g, '');
     img.loading = 'lazy';
     img.onerror = function(){ this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
-    div.appendChild(img);
+    a.appendChild(img);
+    div.appendChild(a);
     grid.appendChild(div);
   }
   agirvLoadedCount = end;
