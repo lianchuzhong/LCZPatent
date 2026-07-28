@@ -393,7 +393,7 @@ function loadMoreLingerie() {
     img.src = imgProxy(LINGERIE_IMG_BASE + '/' + encodeURIComponent(name));
     img.alt = name.replace(/[.][^.]+$/, '').replace(/^2s*/, '').replace(/[()]/g, '');
     img.loading = 'lazy';
-    img.onerror = function(){ if(this.dataset.direct && this.src !== this.dataset.direct){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    img.onerror = function(){ if(this.dataset.direct && this.src.indexOf('wsrv.nl')>=0){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
     a.appendChild(img);
     div.appendChild(a);
     grid.appendChild(div);
@@ -443,7 +443,7 @@ function loadMoreToys() {
     img.src = imgProxy(TOYS_IMG_BASE + '/' + encodeURIComponent(name));
     img.alt = name.replace(/.[^.]+$/, '').replace(/^2s*/, '').replace(/[()]/g, '');
     img.loading = 'lazy';
-    img.onerror = function(){ if(this.dataset.direct && this.src !== this.dataset.direct){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    img.onerror = function(){ if(this.dataset.direct && this.src.indexOf('wsrv.nl')>=0){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
     a.appendChild(img);
     div.appendChild(a);
     grid.appendChild(div);
@@ -493,7 +493,7 @@ function loadMoreAGIRV() {
     img.src = imgProxy(AGIRV_IMG_BASE + '/' + encodeURIComponent(name));
     img.alt = name.replace(/.[^.]+$/, '').replace(/[()]/g, '');
     img.loading = 'lazy';
-    img.onerror = function(){ if(this.dataset.direct && this.src !== this.dataset.direct){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    img.onerror = function(){ if(this.dataset.direct && this.src.indexOf('wsrv.nl')>=0){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
     a.appendChild(img);
     div.appendChild(a);
     grid.appendChild(div);
@@ -543,7 +543,7 @@ function loadMoreShoes() {
     img.src = imgProxy(SHOES_IMG_BASE + '/' + encodeURIComponent(name));
     img.alt = name.replace(/[.][^.]+$/, '').replace(/^2s*/, '').replace(/[()]/g, '');
     img.loading = 'lazy';
-    img.onerror = function(){ if(this.dataset.direct && this.src !== this.dataset.direct){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
+    img.onerror = function(){ if(this.dataset.direct && this.src.indexOf('wsrv.nl')>=0){ this.src = this.dataset.direct; return; } this.parentElement.innerHTML = '<div style=padding:40px;text-align:center;color:var(--text2)>加载失败</div>'; };
     a.appendChild(img);
     div.appendChild(a);
     grid.appendChild(div);
